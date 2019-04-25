@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-family: 'VT323', monospace;
+    font-size: 62.5%;
+}
+
+body {
+    background: black;
+    display: flex;
+    justify-content: center;
+}
+
+.gamarea {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: fit-content;
+}
+
+.row {
+    display: flex;
+    width: fit-content;
+}
+
+.hero {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+}
+
+.event {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: scaleX(-1);
+}
