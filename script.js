@@ -6,7 +6,7 @@
         html: document.querySelector('.hero'),
     }
     const eventHtml = document.querySelector('.event');
-    const eventSrc = ['img/chest/chest_', 'img/chest/chest_Full_', 'img/moobs/big_demon_', 'img/moobs/big_zombie_', 'img/moobs/chort_', 'img/moobs/goblin_', 'img/moobs/ice_zombie_', 'img/moobs/imp_'];
+    const eventSrc = ['img/chest/chest_', 'img/chest/chest_full_', 'img/moobs/big_demon_', 'img/moobs/big_zombie_', 'img/moobs/chort_', 'img/moobs/goblin_', 'img/moobs/ice_zombie_', 'img/moobs/imp_'];
 
     const weapons = [{
         name: 'knife',
