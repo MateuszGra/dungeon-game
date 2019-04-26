@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+:root {
+    --colorRed: #750f1d;
+}
+
 html {
     font-family: 'VT323', monospace;
     font-size: 62.5%;
@@ -19,6 +23,7 @@ body {
     flex-direction: column;
     position: relative;
     width: fit-content;
+    overflow: hidden;
 }
 
 .row {
@@ -37,4 +42,42 @@ body {
     top: 50%;
     left: 50%;
     transform: scaleX(-1);
+    cursor: pointer;
+}
+
+.heroInfo {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    align-items: center;
+    height: 4rem;
+    width: 100%;
+    margin: 5% 0 0 0;
+    color: white;
+    font-size: 3rem;
+}
+
+.heroInfo {
+    position: absolute;
+}
+
+.live {
+    height: 3.5rem;
+    margin: 0 0.5rem 0 0;
+}
+
+.coin {
+    margin: 0 0 0 1rem;
+}
+
+.heroInfo2 {
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: 4rem;
+    height: 5rem;
+}
+
+.flask {
+    cursor: pointer;
 }

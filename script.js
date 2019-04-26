@@ -6,7 +6,8 @@
         html: document.querySelector('.hero'),
     }
     const eventHtml = document.querySelector('.event');
-    const eventSrc = ['img/chest/chest_', 'img/chest/chest_full_', 'img/moobs/big_demon_', 'img/moobs/big_zombie_', 'img/moobs/chort_', 'img/moobs/goblin_', 'img/moobs/ice_zombie_', 'img/moobs/imp_'];
+    const eventSrc = ['img/chest/chest_', 'img/chest/chest_full_', 'img/moobs/big_demon_', 'img/moobs/big_zombie_', 'img/moobs/chort_', 'img/moobs/goblin_', 'img/moobs/ice_zombie_', 'img/moobs/imp_', 'img/moobs/masked_orc_', 'img/moobs/muddy_', 'img/moobs/necromancer_', 'img/moobs/ogre_', 'img/moobs/orc_shaman_', 'img/moobs/orc_warrior_', 'img/moobs/skelet_', 'img/moobs/swampy_', 'img/moobs/tiny_zombie_', 'img/moobs/wogol_', 'img/moobs/zombie_', ];
+    const hpHtml = document.querySelector('.hp').textContent = hero.HP + '/' + hero.maxHP;
 
     const weapons = [{
         name: 'knife',
@@ -156,6 +157,7 @@
         }
         hero.html.src = 'img/heores/knight_' + number + '.png';
         eventHtml.src = eventDraw + number + '.png';
+        document.querySelector('.coin').src = 'img/icons/coin_' + number + '.png';
     }
     setInterval(() => {
         animate();
