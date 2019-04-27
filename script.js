@@ -7,6 +7,7 @@
         HP: 100,
         weapon: 0,
         flasks: 3,
+        gold: 0,
         html: document.querySelector('.hero'),
         img: 'img/heores/knight_',
     }
@@ -19,20 +20,20 @@
     }, {
         name: 'goblin',
         img: 'img/moobs/goblin_',
-        HP: 10,
-        minDamage: 1,
-        maxDamage: 4,
+        HP: 18,
+        minDamage: 0,
+        maxDamage: 3,
     }, {
         name: 'imp',
         img: 'img/moobs/imp_',
-        HP: 12,
+        HP: 10,
         minDamage: 2,
-        maxDamage: 3,
+        maxDamage: 5,
     }, {
         name: 'tiny zombie',
         img: 'img/moobs/tiny_zombie_',
-        HP: 12,
-        minDamage: 1,
+        HP: 20,
+        minDamage: 0,
         maxDamage: 3,
     }, {
         name: 'muddy',
@@ -114,6 +115,12 @@
 
     const hpHtml = document.querySelector('.hp');
     hpHtml.textContent = hero.HP + '/' + hero.maxHP;
+
+    const gold = document.querySelector('.gold');
+    gold.textContent = hero.gold;
+
+    const levelHtml = document.querySelector('.level');
+    levelHtml.textContent = hero.level;
 
     const eventHtml = document.querySelector('.event');
     const liveHtml = document.querySelector('.live');
@@ -257,28 +264,41 @@
     function event() {
         let heroPower;
         if (hero.level < 10) {
-            heroPower = 4;
+            heroPower = 5;
         } else {
             heroPower = moobs.length;
         }
-        eventLot = lottery(0, heroPower);
-        eventHP = moobs[eventLot].HP;
-        eventFullHp = eventHP;
-        eventHpHtml.style.width = (eventHP / eventFullHp * 100) + '%';
-        eventFullHpHtml.style.width = 100 + '%';
 
-        if (eventLot <= 1) {
+        if (lottery(0, 10) > 2) {
+            eventLot = lottery(2, heroPower);
+            eventHP = moobs[eventLot].HP;
+            eventFullHp = eventHP;
+            eventHpHtml.style.width = (eventHP / eventFullHp * 100) + '%';
+            eventFullHpHtml.style.width = 100 + '%';
+        } else {
+            eventLot = lottery(0, 2);
             eventHpHtml.style.width = 0 + '%';
             eventFullHpHtml.style.width = 0 + '%';
         }
     }
 
+    function createFlask() {
+        while (hero.flasks > 0) {
+            for (i = 0; i < flaskHtml.length; i++) {
+                if (flaskHtml[i].classList[1] != 'full') {
+                    if (hero.flasks > 0) {
+                        flaskHtml[i].classList.add('full');
+                        hero.flasks = hero.flasks - 1;
+                    }
+                }
+            }
+            hero.flasks = hero.flasks - 1;
+        }
+    }
+
     createDangeon();
     event();
-
-    for (i = 0; i < hero.flasks; i++) {
-        flaskHtml[i].classList.add('full');
-    }
+    createFlask();
 
     //animations
     let number = -1;
@@ -317,14 +337,22 @@
             let damageHero = lottery(weapons[hero.weapon].minDamage, weapons[hero.weapon].maxDamage) + lottery(1, 6) + hero.level;
             eventHP = eventHP - damageHero;
             eventHpHtml.style.width = (eventHP / eventFullHp * 100) + '%';
+        } else if (eventLot == 1) {
+            hero.flasks = lottery(0, 4);
+            createFlask();
+            hero.gold = hero.gold + lottery(0, 15);
+            gold.textContent = hero.gold;
         }
+
         if (eventHP <= 0 || eventLot <= 1) {
             createDangeon();
             event();
         }
+
         liveLevel();
         hpHtml.textContent = hero.HP + '/' + hero.maxHP;
     });
+
     for (i = 0; i < flaskHtml.length; i++) {
         flaskHtml[i].addEventListener('click', function (e) {
             if (this.classList[1] == 'full' && hero.HP < hero.maxHP) {

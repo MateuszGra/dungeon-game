@@ -129,6 +129,32 @@ body {
     background: black;
 }
 
+.panelLeft {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 3rem;
+}
+
+.level {
+    margin: 0 0 5rem 0;
+}
+
+.panelLeft button {
+    color: white;
+    background: var(--colorRed);
+    border: none;
+    font-family: 'VT323', monospace;
+    font-size: 3rem;
+    width: 80%;
+    height: 5rem;
+    border-radius: 1rem;
+    margin: 5rem 0 0 0;
+    cursor: pointer;
+}
+
 @media (max-width: 900px) {
     .row img {
         width: calc(80vw /4);
