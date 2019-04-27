@@ -357,6 +357,7 @@
         event();
         gold.textContent = hero.gold;
         levelHtml.textContent = hero.level;
+        hpHtml.textContent = hero.HP + '/' + hero.maxHP;
     }
 
     function liveLevel() {

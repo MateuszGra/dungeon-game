@@ -158,8 +158,8 @@ body {
 .endGame {
     box-sizing: border-box;
     position: absolute;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background: var(--clorBlack);
     z-index: 2;
 }
@@ -188,10 +188,12 @@ body {
     font-size: 10rem;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1025px) {
     .row img {
         width: calc(80vw /4);
         height: calc(80vw /4);
+        max-height: 8rem;
+        max-width: 8rem;
     }
 
     .heroInfo {
