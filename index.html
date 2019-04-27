@@ -2,7 +2,6 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dungeon</title>
     <link rel="stylesheet" type="text/css" href="style.css">
@@ -10,6 +9,11 @@
 </head>
 
 <body>
+    <section class="panelLeft">
+        <div class="weapon">
+            <img src="img/weapons/knife.png">
+        </div>
+    </section>
     <section class="gamarea">
         <div class="heroInfo">
             <img class="live" src="img/icons/heart_0.png">
@@ -35,35 +39,44 @@
             <img class="wallBottom"></img>
             <img class="wallBottom"></img>
         </div>
-        <div class="row">
-            <img class="floor floorTop"></img>
-            <img class="floor floorTop"></img>
-            <img class="floor floorTop"></img>
-            <img class="floor floorTop"></img>
+        <div class="floors">
+            <div class="row">
+                <img class="floor floorTop"></img>
+                <img class="floor floorTop"></img>
+                <img class="floor floorTop"></img>
+                <img class="floor floorTop"></img>
+            </div>
+            <div class="row">
+                <img class="floor"></img>
+                <img class="floor"></img>
+                <img class="floor"></img>
+                <img class="floor"></img>
+            </div>
+            <div class="row">
+                <img class="floor"></img>
+                <img class="floor"></img>
+                <img class="floor"></img>
+                <img class="floor"></img>
+            </div>
+            <div class="row">
+                <img class="floor"></img>
+                <img class="floor"></img>
+                <img class="floor"></img>
+                <img class="floor"></img>
+            </div>
+            <img class="hero">
+            <div class="eventContainer">
+                <img class="event">
+                <figure class="eventHp"></figure>
+                <figure class="eventFullHp">></figure>
+            </div>
         </div>
-        <div class="row">
-            <img class="floor"></img>
-            <img class="floor"></img>
-            <img class="floor"></img>
-            <img class="floor"></img>
-        </div>
-        <div class="row">
-            <img class="floor"></img>
-            <img class="floor"></img>
-            <img class="floor"></img>
-            <img class="floor"></img>
-        </div>
-        <div class="row">
-            <img class="floor"></img>
-            <img class="floor"></img>
-            <img class="floor"></img>
-            <img class="floor"></img>
-        </div>
-        <img class="hero">
-        <img class="event">
-        <div class="heroInfo2">
-            <img class="flask" src="img/icons/flask_big_.png">
-            <p>0/10</p>
+        <div class="flasks">
+            <div class="flask"></div>
+            <div class="flask"></div>
+            <div class="flask"></div>
+            <div class="flask"></div>
+            <div class="flask"></div>
         </div>
     </section>
     <script src="script.js"></script>

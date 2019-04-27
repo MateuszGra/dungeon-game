@@ -15,7 +15,10 @@ html {
 body {
     background: black;
     display: flex;
+    align-items: center;
     justify-content: center;
+    flex-direction: row;
+    min-height: 100vh;
 }
 
 .gamarea {
@@ -31,18 +34,15 @@ body {
     width: fit-content;
 }
 
+.floors {
+    position: relative;
+}
+
 .hero {
     position: absolute;
     top: 50%;
     left: 10%;
-}
-
-.event {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: scaleX(-1);
-    cursor: pointer;
+    transform: translateY(-60%);
 }
 
 .heroInfo {
@@ -70,14 +70,85 @@ body {
     margin: 0 0 0 1rem;
 }
 
-.heroInfo2 {
+.flasks {
     display: flex;
     align-items: center;
+    justify-content: center;
     color: white;
     font-size: 4rem;
-    height: 5rem;
+    height: 6rem;
 }
 
 .flask {
     cursor: pointer;
+    background: url(img/icons/flask_big_empty.png) no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 6rem;
+    width: 6rem;
+}
+
+.full {
+    background: url(img/icons/flask_big_.png) no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.weapon {
+    display: flex;
+    justify-content: center;
+    max-width: calc(100vw - 80vw);
+    min-width: 7rem;
+}
+
+.eventContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-60%) scaleX(-1);
+}
+
+.event {
+    cursor: pointer;
+}
+
+.eventHp {
+    position: absolute;
+    margin: 1rem 0 0 0;
+    height: 1rem;
+    background: var(--colorRed);
+    transition: 0.2s;
+    z-index: 1;
+}
+
+.eventFullHp {
+    position: absolute;
+    margin: 1rem 0 0 0;
+    height: 1rem;
+    width: 100%;
+    background: black;
+}
+
+@media (max-width: 900px) {
+    .row img {
+        width: calc(80vw /4);
+        height: calc(80vw /4);
+    }
+
+    .heroInfo {
+        height: 3rem;
+        font-size: 2rem;
+    }
+
+    .live {
+        height: 2rem;
+    }
+
+    .coin {
+        height: 2rem;
+    }
+
+    .hero {
+        left: 5%;
+    }
 }
