@@ -5,6 +5,7 @@
 
 :root {
     --colorRed: #750f1d;
+    --clorBlack: rgba(0, 0, 0, 0.9);
 }
 
 html {
@@ -145,14 +146,46 @@ body {
 .panelLeft button {
     color: white;
     background: var(--colorRed);
-    border: none;
     font-family: 'VT323', monospace;
     font-size: 3rem;
-    width: 80%;
+    width: 90%;
     height: 5rem;
     border-radius: 1rem;
     margin: 5rem 0 0 0;
     cursor: pointer;
+}
+
+.endGame {
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--clorBlack);
+    z-index: 2;
+}
+
+.endGame button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'VT323', monospace;
+    color: white;
+    background: var(--colorRed);
+    font-size: 3rem;
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+.endGame h1 {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    width: 100%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    color: var(--colorRed);
+    font-size: 10rem;
 }
 
 @media (max-width: 900px) {
@@ -177,4 +210,12 @@ body {
     .hero {
         left: 5%;
     }
+
+    .endGame h1 {
+        font-size: 5rem;
+    }
+}
+
+.none {
+    display: none;
 }

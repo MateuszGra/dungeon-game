@@ -14,119 +14,124 @@
     const moobs = [{
         name: 'chest empty',
         img: 'img/chest/chest_',
+        experience: 0,
     }, {
         name: 'chest full',
         img: 'img/chest/chest_full_',
+        experience: 0,
     }, {
         name: 'goblin',
         img: 'img/moobs/goblin_',
         HP: 18,
         minDamage: 0,
         maxDamage: 3,
+        experience: 10,
     }, {
         name: 'imp',
         img: 'img/moobs/imp_',
         HP: 10,
         minDamage: 2,
         maxDamage: 5,
+        experience: 12,
     }, {
         name: 'tiny zombie',
         img: 'img/moobs/tiny_zombie_',
         HP: 20,
         minDamage: 0,
         maxDamage: 3,
+        experience: 10,
     }, {
         name: 'muddy',
         img: 'img/moobs/muddy_',
         HP: 30,
-        minDamage: 10,
-        maxDamage: 20,
+        minDamage: 2,
+        maxDamage: 6,
+        experience: 15,
     }, {
         name: 'swampy',
         img: 'img/moobs/swampy_',
         HP: 35,
-        minDamage: 10,
-        maxDamage: 23,
+        minDamage: 2,
+        maxDamage: 6,
+        experience: 15,
     }, {
         name: 'skelet',
         img: 'img/moobs/skelet_',
         HP: 70,
-        minDamage: 10,
-        maxDamage: 25,
+        minDamage: 3,
+        maxDamage: 5,
+        experience: 20,
     }, {
         name: 'zombie',
         img: 'img/moobs/zombie_',
-        HP: 70,
-        minDamage: 10,
-        maxDamage: 25,
+        HP: 50,
+        minDamage: 2,
+        maxDamage: 6,
+        experience: 20,
     }, {
         name: 'ice zombie',
         img: 'img/moobs/ice_zombie_',
         HP: 70,
-        minDamage: 10,
+        minDamage: 6,
         maxDamage: 26,
+        experience: 23,
     }, {
         name: 'orc warrior',
         img: 'img/moobs/orc_warrior_',
         HP: 80,
-        minDamage: 11,
+        minDamage: 6,
         maxDamage: 27,
+        experience: 26,
     }, {
         name: 'masked orc',
         img: 'img/moobs/masked_orc_',
         HP: 85,
-        minDamage: 13,
+        minDamage: 5,
         maxDamage: 30,
+        experience: 30,
     }, {
         name: 'orc shaman',
         img: 'img/moobs/orc_shaman_',
         HP: 60,
-        minDamage: 15,
+        minDamage: 5,
         maxDamage: 30,
+        experience: 30,
     }, {
         name: 'chort',
         img: 'img/moobs/chort_',
         HP: 60,
-        minDamage: 15,
+        minDamage: 6,
         maxDamage: 30,
+        experience: 30,
     }, {
         name: 'necromancer',
         img: 'img/moobs/necromancer_',
         HP: 60,
+        minDamage: 5,
+        maxDamage: 30,
+        experience: 30,
     }, {
         name: 'ogre',
         img: 'img/moobs/ogre_',
         HP: 100,
-        minDamage: 15,
+        minDamage: 10,
         maxDamage: 30,
+        experience: 40,
     }, {
         name: 'big demon',
         img: 'img/moobs/big_demon_',
         HP: 90,
-        minDamage: 15,
+        minDamage: 10,
         maxDamage: 30,
+        experience: 40,
     }, {
         name: 'big zombie',
         img: 'img/moobs/big_zombie_',
         HP: 90,
-        minDamage: 15,
+        minDamage: 10,
         maxDamage: 30,
+        experience: 40,
     }]
-
-    const hpHtml = document.querySelector('.hp');
-    hpHtml.textContent = hero.HP + '/' + hero.maxHP;
-
-    const gold = document.querySelector('.gold');
-    gold.textContent = hero.gold;
-
-    const levelHtml = document.querySelector('.level');
-    levelHtml.textContent = hero.level;
-
-    const eventHtml = document.querySelector('.event');
-    const liveHtml = document.querySelector('.live');
-    const eventHpHtml = document.querySelector('.eventHp');
-    const eventFullHpHtml = document.querySelector('.eventFullHp');
-    const flaskHtml = document.querySelectorAll('.flask');
 
     const weapons = [{
         name: 'knife',
@@ -210,6 +215,23 @@
         src: 'img/weapons/two_handed_golden_sword.png',
     }, ];
 
+    const hpHtml = document.querySelector('.hp');
+    hpHtml.textContent = hero.HP + '/' + hero.maxHP;
+
+    const gold = document.querySelector('.gold');
+    gold.textContent = hero.gold;
+
+    const levelHtml = document.querySelector('.level');
+    levelHtml.textContent = hero.level;
+
+    const eventHtml = document.querySelector('.event');
+    const liveHtml = document.querySelector('.live');
+    const eventHpHtml = document.querySelector('.eventHp');
+    const eventFullHpHtml = document.querySelector('.eventFullHp');
+    const flaskHtml = document.querySelectorAll('.flask');
+    const endGame = document.querySelector('.endGame');
+    const endGameButton = document.querySelector('.endGame button');
+
     function lottery(min, max) {
         min = Math.ceil(min);
         max = Math.floor(max);
@@ -263,8 +285,10 @@
 
     function event() {
         let heroPower;
-        if (hero.level < 10) {
+        if (hero.level < 4) {
             heroPower = 5;
+        } else if (hero.level < 6) {
+            heroPower = 9;
         } else {
             heroPower = moobs.length;
         }
@@ -296,10 +320,6 @@
         }
     }
 
-    createDangeon();
-    event();
-    createFlask();
-
     //animations
     let number = -1;
 
@@ -317,6 +337,28 @@
         animate();
     }, 150);
 
+    function reset() {
+        hero.experience = 0;
+        hero.level = 1;
+        hero.maxHP = 100;
+        hero.HP = 100;
+        hero.weapon = 0;
+        hero.flasks = 3;
+        hero.gold = 0;
+
+        liveLevel();
+
+        for (i = 0; i < flaskHtml.length; i++) {
+            flaskHtml[i].classList.remove('full');
+        }
+
+        createFlask();
+        createDangeon();
+        event();
+        gold.textContent = hero.gold;
+        levelHtml.textContent = hero.level;
+    }
+
     function liveLevel() {
         if (hero.HP >= 0.5 * hero.maxHP) {
             liveHtml.src = 'img/icons/heart_0.png';
@@ -324,9 +366,21 @@
             liveHtml.src = 'img/icons/heart_2.png';
             if (hero.HP <= 0) {
                 hero.HP = 0;
+                endGame.classList.remove('none');
             }
         } else if (hero.HP <= 0.5 * hero.maxHP) {
             liveHtml.src = 'img/icons/heart_1.png';
+        }
+    }
+
+    function levelUp() {
+        const exp = 100;
+        if (hero.experience > exp * hero.level + 0.35 * hero.experience) {
+            hero.level++;
+            levelHtml.textContent = hero.level;
+            hero.HP += 5;
+            hero.maxHP += 5;
+            hpHtml.textContent = hero.HP + '/' + hero.maxHP;
         }
     }
     //events
@@ -340,11 +394,13 @@
         } else if (eventLot == 1) {
             hero.flasks = lottery(0, 4);
             createFlask();
-            hero.gold = hero.gold + lottery(0, 15);
+            hero.gold = hero.gold + lottery(0, 15) + lottery(0, hero.level);
             gold.textContent = hero.gold;
         }
 
         if (eventHP <= 0 || eventLot <= 1) {
+            hero.experience = hero.experience + moobs[eventLot].experience + hero.level;
+            levelUp();
             createDangeon();
             event();
         }
@@ -357,7 +413,7 @@
         flaskHtml[i].addEventListener('click', function (e) {
             if (this.classList[1] == 'full' && hero.HP < hero.maxHP) {
                 this.classList.remove('full');
-                hero.HP = hero.HP + (hero.maxHP / 4) + lottery(0, (hero.maxHP / 3));
+                hero.HP = hero.HP + Math.round((hero.maxHP / 4) + lottery(0, (hero.maxHP / 3)));
                 if (hero.HP > hero.maxHP) {
                     hero.HP = hero.maxHP;
                 }
@@ -366,4 +422,12 @@
             liveLevel();
         });
     }
+
+    endGameButton.addEventListener('click', function (e) {
+        endGame.classList.add('none');
+        reset();
+    });
+
+    event();
+    createDangeon();
 })();
