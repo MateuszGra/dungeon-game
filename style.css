@@ -6,6 +6,8 @@
 :root {
     --colorRed: #750f1d;
     --clorBlack: rgba(0, 0, 0, 0.9);
+    --colorGold: #a67c00;
+    --colorFlask: #da4e38;
 }
 
 html {
@@ -39,13 +41,6 @@ body {
     position: relative;
 }
 
-.hero {
-    position: absolute;
-    top: 50%;
-    left: 10%;
-    transform: translateY(-60%);
-}
-
 .heroInfo {
     display: flex;
     align-items: center;
@@ -53,13 +48,8 @@ body {
     align-items: center;
     height: 4rem;
     width: 100%;
-    margin: 5% 0 0 0;
     color: white;
     font-size: 3rem;
-}
-
-.heroInfo {
-    position: absolute;
 }
 
 .live {
@@ -105,7 +95,7 @@ body {
 .eventContainer {
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 55%;
     transform: translateY(-60%) scaleX(-1);
 }
 
@@ -113,7 +103,15 @@ body {
     cursor: pointer;
 }
 
-.eventHp {
+.heroContainer {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translateY(-60%);
+}
+
+.eventHp,
+.heroHp {
     position: absolute;
     margin: 1rem 0 0 0;
     height: 1rem;
@@ -122,7 +120,8 @@ body {
     z-index: 1;
 }
 
-.eventFullHp {
+.eventFullHp,
+.heroFullHp {
     position: absolute;
     margin: 1rem 0 0 0;
     height: 1rem;
@@ -143,10 +142,23 @@ body {
     margin: 0 0 5rem 0;
 }
 
-.panelLeft button {
+.panelLeft button,
+.endGame button {
     color: white;
     background: var(--colorRed);
     font-family: 'VT323', monospace;
+    border: none;
+    box-shadow: 0rem 0.4rem lightgrey;
+    outline: none;
+}
+
+.panelLeft button:active,
+.endGame button:active {
+    box-shadow: 0rem 0.2rem dimgray;
+    transform: translateY(0.2rem);
+}
+
+.panelLeft button {
     font-size: 3rem;
     width: 90%;
     height: 5rem;
@@ -156,7 +168,9 @@ body {
 }
 
 .endGame {
-    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     position: absolute;
     width: 100%;
     height: 100%;
@@ -165,27 +179,71 @@ body {
 }
 
 .endGame button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-family: 'VT323', monospace;
-    color: white;
-    background: var(--colorRed);
+    margin: 5rem 0 0 0;
     font-size: 3rem;
     border-radius: 1rem;
     padding: 1rem;
 }
 
 .endGame h1 {
-    position: absolute;
-    top: 30%;
-    left: 50%;
     width: 100%;
     text-align: center;
-    transform: translate(-50%, -50%);
     color: var(--colorRed);
     font-size: 10rem;
+    margin: 25vh 0 0 0;
+}
+
+.damage,
+.damageMoob,
+.levelUp,
+.items,
+.flasksAdd {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 4rem;
+    font-weight: 700;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    text-shadow: 0rem 0rem black;
+    animation: fly 1s;
+}
+
+.damage {
+    color: var(--colorRed);
+}
+
+.damageMoob {
+    color: var(--colorRed);
+    transform: scaleX(-1);
+}
+
+.levelUp,
+.items {
+    color: var(--colorGold);
+    animation: fly 2s;
+}
+
+.items,
+.flasksAdd {
+    transform: scaleX(-1);
+}
+
+.flasksAdd {
+    color: var(--colorFlask);
+    animation: fly 2s 0.4s;
+}
+
+@keyframes fly {
+    0% {
+        top: 0;
+    }
+
+    100% {
+        top: -10rem;
+    }
 }
 
 @media (max-width: 1025px) {
@@ -194,19 +252,6 @@ body {
         height: calc(80vw /4);
         max-height: 8rem;
         max-width: 8rem;
-    }
-
-    .heroInfo {
-        height: 3rem;
-        font-size: 2rem;
-    }
-
-    .live {
-        height: 2rem;
-    }
-
-    .coin {
-        height: 2rem;
     }
 
     .hero {

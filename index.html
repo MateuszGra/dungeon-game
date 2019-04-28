@@ -9,6 +9,10 @@
 </head>
 
 <body>
+    <div class="endGame">
+        <h1>Random Dangeon</h1>
+        <button>NEW GAME</button>
+    </div>
     <section class="panelLeft">
         <p>LVL:</p>
         <p class="level"></p>
@@ -67,7 +71,11 @@
                 <img class="floor"></img>
                 <img class="floor"></img>
             </div>
-            <img class="hero">
+            <div class="heroContainer">
+                <img class="hero">
+                <figure class="heroHp"></figure>
+                <figure class="heroFullHp">></figure>
+            </div>
             <div class="eventContainer">
                 <img class="event">
                 <figure class="eventHp"></figure>
@@ -82,10 +90,6 @@
             <div class="flask"></div>
         </div>
     </section>
-    <div class="endGame">
-        <h1>Random Dangeon</h1>
-        <button>NEW GAME</button>
-    </div>
     <script src="script.js"></script>
 </body>
 

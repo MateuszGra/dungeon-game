@@ -24,113 +24,113 @@
         img: 'img/moobs/goblin_',
         HP: 18,
         minDamage: 0,
-        maxDamage: 3,
+        maxDamage: 4,
         experience: 10,
     }, {
         name: 'imp',
         img: 'img/moobs/imp_',
         HP: 10,
         minDamage: 2,
-        maxDamage: 5,
+        maxDamage: 6,
         experience: 12,
     }, {
         name: 'tiny zombie',
         img: 'img/moobs/tiny_zombie_',
         HP: 20,
         minDamage: 0,
-        maxDamage: 3,
+        maxDamage: 4,
         experience: 10,
     }, {
         name: 'muddy',
         img: 'img/moobs/muddy_',
         HP: 30,
         minDamage: 2,
-        maxDamage: 6,
+        maxDamage: 7,
         experience: 15,
     }, {
         name: 'swampy',
         img: 'img/moobs/swampy_',
         HP: 35,
         minDamage: 2,
-        maxDamage: 6,
+        maxDamage: 7,
         experience: 15,
     }, {
         name: 'skelet',
         img: 'img/moobs/skelet_',
         HP: 70,
         minDamage: 3,
-        maxDamage: 5,
+        maxDamage: 6,
         experience: 20,
     }, {
         name: 'zombie',
         img: 'img/moobs/zombie_',
         HP: 50,
         minDamage: 2,
-        maxDamage: 6,
+        maxDamage: 7,
         experience: 20,
     }, {
         name: 'ice zombie',
         img: 'img/moobs/ice_zombie_',
         HP: 70,
-        minDamage: 6,
-        maxDamage: 26,
-        experience: 23,
+        minDamage: 2,
+        maxDamage: 8,
+        experience: 30,
     }, {
         name: 'orc warrior',
         img: 'img/moobs/orc_warrior_',
         HP: 80,
-        minDamage: 6,
-        maxDamage: 27,
-        experience: 26,
+        minDamage: 0,
+        maxDamage: 10,
+        experience: 32,
     }, {
         name: 'masked orc',
         img: 'img/moobs/masked_orc_',
         HP: 85,
-        minDamage: 5,
-        maxDamage: 30,
-        experience: 30,
+        minDamage: 2,
+        maxDamage: 15,
+        experience: 40,
     }, {
         name: 'orc shaman',
         img: 'img/moobs/orc_shaman_',
-        HP: 60,
+        HP: 50,
         minDamage: 5,
-        maxDamage: 30,
-        experience: 30,
+        maxDamage: 12,
+        experience: 40,
     }, {
         name: 'chort',
         img: 'img/moobs/chort_',
-        HP: 60,
-        minDamage: 6,
-        maxDamage: 30,
-        experience: 30,
+        HP: 40,
+        minDamage: 0,
+        maxDamage: 25,
+        experience: 40,
     }, {
         name: 'necromancer',
         img: 'img/moobs/necromancer_',
         HP: 60,
         minDamage: 5,
-        maxDamage: 30,
-        experience: 30,
+        maxDamage: 25,
+        experience: 45,
     }, {
         name: 'ogre',
         img: 'img/moobs/ogre_',
         HP: 100,
-        minDamage: 10,
-        maxDamage: 30,
-        experience: 40,
+        minDamage: 4,
+        maxDamage: 17,
+        experience: 45,
     }, {
         name: 'big demon',
         img: 'img/moobs/big_demon_',
         HP: 90,
-        minDamage: 10,
-        maxDamage: 30,
-        experience: 40,
+        minDamage: 4,
+        maxDamage: 17,
+        experience: 45,
     }, {
         name: 'big zombie',
         img: 'img/moobs/big_zombie_',
         HP: 90,
-        minDamage: 10,
-        maxDamage: 30,
-        experience: 40,
+        minDamage: 4,
+        maxDamage: 17,
+        experience: 45,
     }]
 
     const weapons = [{
@@ -227,10 +227,13 @@
     const eventHtml = document.querySelector('.event');
     const liveHtml = document.querySelector('.live');
     const eventHpHtml = document.querySelector('.eventHp');
+    const heroHpHtml = document.querySelector('.heroHp');
     const eventFullHpHtml = document.querySelector('.eventFullHp');
     const flaskHtml = document.querySelectorAll('.flask');
     const endGame = document.querySelector('.endGame');
     const endGameButton = document.querySelector('.endGame button');
+    const heroContainer = document.querySelector('.heroContainer');
+    const eventContainer = document.querySelector('.eventContainer');
 
     function lottery(min, max) {
         min = Math.ceil(min);
@@ -306,6 +309,27 @@
         }
     }
 
+    function CrateInscription(where, text, style) {
+        let log = document.createElement('div');
+        where.appendChild(log);
+        log.textContent = text;
+        log.classList.add(style);
+        if (style == 'items') {
+            const coinAdd = document.createElement('img');
+            log.appendChild(coinAdd);
+            document.querySelector('.' + style + ' img').src = 'img/icons/coin_3.png';
+
+        } else if (style == 'flasksAdd') {
+            const flaskAdd = document.createElement('img');
+            log.appendChild(flaskAdd);
+            document.querySelector('.' + style + ' img').src = 'img/icons/flask_big_.png';
+        }
+
+        log.addEventListener('animationend', function (e) {
+            log.remove();
+        });
+    }
+
     function createFlask() {
         while (hero.flasks > 0) {
             for (i = 0; i < flaskHtml.length; i++) {
@@ -372,6 +396,7 @@
         } else if (hero.HP <= 0.5 * hero.maxHP) {
             liveHtml.src = 'img/icons/heart_1.png';
         }
+        heroHpHtml.style.width = (hero.HP / hero.maxHP * 100) + '%';
     }
 
     function levelUp() {
@@ -379,9 +404,10 @@
         if (hero.experience > exp * hero.level + 0.35 * hero.experience) {
             hero.level++;
             levelHtml.textContent = hero.level;
-            hero.HP += 5;
             hero.maxHP += 5;
+            hero.HP += 5;
             hpHtml.textContent = hero.HP + '/' + hero.maxHP;
+            CrateInscription(heroContainer, 'LEVEL UP!', 'levelUp');
         }
     }
     //events
@@ -392,11 +418,18 @@
             let damageHero = lottery(weapons[hero.weapon].minDamage, weapons[hero.weapon].maxDamage) + lottery(1, 6) + hero.level;
             eventHP = eventHP - damageHero;
             eventHpHtml.style.width = (eventHP / eventFullHp * 100) + '%';
+
+            CrateInscription(heroContainer, damageMoob, 'damage');
+            CrateInscription(eventContainer, damageHero, 'damageMoob');
+
         } else if (eventLot == 1) {
             hero.flasks = lottery(0, 4);
+            CrateInscription(eventContainer, hero.flasks, 'flasksAdd');
             createFlask();
-            hero.gold = hero.gold + lottery(0, 15) + lottery(0, hero.level);
+            let goldAdd = lottery(0, 15) + lottery(0, hero.level);
+            hero.gold = hero.gold + goldAdd;
             gold.textContent = hero.gold;
+            CrateInscription(eventContainer, goldAdd, 'items');
         }
 
         if (eventHP <= 0 || eventLot <= 1) {
@@ -414,7 +447,9 @@
         flaskHtml[i].addEventListener('click', function (e) {
             if (this.classList[1] == 'full' && hero.HP < hero.maxHP) {
                 this.classList.remove('full');
-                hero.HP = hero.HP + Math.round((hero.maxHP / 4) + lottery(0, (hero.maxHP / 3)));
+                let addHp = Math.round((hero.maxHP / 4) + lottery(0, (hero.maxHP / 3)))
+                hero.HP = hero.HP + addHp;
+                CrateInscription(heroContainer, '+' + addHp, 'damage');
                 if (hero.HP > hero.maxHP) {
                     hero.HP = hero.maxHP;
                 }
