@@ -411,7 +411,7 @@
         }
     }
     //events
-    eventHtml.addEventListener('click', function (e) {
+    function eventClick() {
         if (eventLot > 1) {
             let damageMoob = lottery(moobs[eventLot].minDamage, moobs[eventLot].maxDamage);
             hero.HP = hero.HP - damageMoob;
@@ -441,7 +441,10 @@
 
         liveLevel();
         hpHtml.textContent = hero.HP + '/' + hero.maxHP;
-    });
+    }
+
+    eventHtml.addEventListener('click', eventClick);
+    eventHtml.addEventListener('touch', eventClick);
 
     for (i = 0; i < flaskHtml.length; i++) {
         flaskHtml[i].addEventListener('click', function (e) {
@@ -457,12 +460,28 @@
             hpHtml.textContent = hero.HP + '/' + hero.maxHP;
             liveLevel();
         });
+        flaskHtml[i].addEventListener('touch', function (e) {
+            if (this.classList[1] == 'full' && hero.HP < hero.maxHP) {
+                this.classList.remove('full');
+                let addHp = Math.round((hero.maxHP / 4) + lottery(0, (hero.maxHP / 3)))
+                hero.HP = hero.HP + addHp;
+                CrateInscription(heroContainer, '+' + addHp, 'damage');
+                if (hero.HP > hero.maxHP) {
+                    hero.HP = hero.maxHP;
+                }
+            }
+            hpHtml.textContent = hero.HP + '/' + hero.maxHP;
+            liveLevel();
+        });
     }
 
-    endGameButton.addEventListener('click', function (e) {
+    function endGameButtonClick() {
         endGame.classList.add('none');
         reset();
-    });
+    }
+
+    endGameButton.addEventListener('click', endGameButtonClick);
+    endGameButton.addEventListener('touch', endGameButtonClick);
 
     event();
     createDangeon();
