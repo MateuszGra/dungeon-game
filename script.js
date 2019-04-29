@@ -302,6 +302,7 @@
             eventFullHp = eventHP;
             eventHpHtml.style.width = (eventHP / eventFullHp * 100) + '%';
             eventFullHpHtml.style.width = 100 + '%';
+            eventHpHtml.style.backgroundColor = "var(--fullHp)";
         } else {
             eventLot = lottery(0, 2);
             eventHpHtml.style.width = 0 + '%';
@@ -317,12 +318,19 @@
         if (style == 'items') {
             const coinAdd = document.createElement('img');
             log.appendChild(coinAdd);
-            document.querySelector('.' + style + ' img').src = 'img/icons/coin_3.png';
+            const coinsImg = document.querySelectorAll('.' + style + ' img');
+            for (i = 0; i < coinsImg.length; i++) {
+                coinsImg[i].src = 'img/icons/coin_0.png';
+            }
 
         } else if (style == 'flasksAdd') {
             const flaskAdd = document.createElement('img');
             log.appendChild(flaskAdd);
-            document.querySelector('.' + style + ' img').src = 'img/icons/flask_big_.png';
+            const flaskImg = document.querySelectorAll('.' + style + ' img')
+            for (i = 0; i < flaskImg.length; i++) {
+                flaskImg[i].src = 'img/icons/flask_big_.png';
+            }
+
         }
 
         log.addEventListener('animationend', function (e) {
@@ -397,6 +405,18 @@
             liveHtml.src = 'img/icons/heart_1.png';
         }
         heroHpHtml.style.width = (hero.HP / hero.maxHP * 100) + '%';
+
+        if ((hero.HP / hero.maxHP * 100) >= 90) {
+            heroHpHtml.style.backgroundColor = "var(--fullHp)";
+        } else if ((hero.HP / hero.maxHP * 100) >= 60) {
+            heroHpHtml.style.backgroundColor = "var(--lessHp)";
+        } else if ((hero.HP / hero.maxHP * 100) >= 30) {
+            heroHpHtml.style.backgroundColor = "var(--mediumHp)";
+        } else if ((hero.HP / hero.maxHP * 100) > 7) {
+            heroHpHtml.style.backgroundColor = "var(--colorFlask)";
+        } else if ((hero.HP / hero.maxHP * 100) <= 7) {
+            heroHpHtml.style.backgroundColor = "var(--colorRed)";
+        }
     }
 
     function levelUp() {
@@ -418,6 +438,18 @@
             let damageHero = lottery(weapons[hero.weapon].minDamage, weapons[hero.weapon].maxDamage) + lottery(1, 6) + hero.level;
             eventHP = eventHP - damageHero;
             eventHpHtml.style.width = (eventHP / eventFullHp * 100) + '%';
+
+            if ((eventHP / eventFullHp * 100) >= 90) {
+                eventHpHtml.style.backgroundColor = "var(--fullHp)";
+            } else if ((eventHP / eventFullHp * 100) >= 60) {
+                eventHpHtml.style.backgroundColor = "var(--lessHp)";
+            } else if ((eventHP / eventFullHp * 100) >= 30) {
+                eventHpHtml.style.backgroundColor = "var(--mediumHp)";
+            } else if ((eventHP / eventFullHp * 100) > 7) {
+                eventHpHtml.style.backgroundColor = "var(--colorFlask)";
+            } else if ((eventHP / eventFullHp * 100) <= 7) {
+                eventHpHtml.style.backgroundColor = "var(--colorRed)";
+            }
 
             CrateInscription(heroContainer, damageMoob, 'damage');
             CrateInscription(eventContainer, damageHero, 'damageMoob');
@@ -485,4 +517,5 @@
 
     event();
     createDangeon();
+    liveLevel();
 })();

@@ -6,8 +6,11 @@
 :root {
     --colorRed: #750f1d;
     --clorBlack: rgba(0, 0, 0, 0.9);
-    --colorGold: #a67c00;
+    --colorGold: #facb3e;
     --colorFlask: #da4e38;
+    --fullHp: #2f911a;
+    --lessHp: #75912b;
+    --mediumHp: #b58700;
 }
 
 html {
@@ -115,7 +118,6 @@ body {
     position: absolute;
     margin: 1rem 0 0 0;
     height: 1rem;
-    background: var(--colorRed);
     transition: 0.2s;
     z-index: 1;
 }
@@ -254,12 +256,18 @@ body {
         max-width: 8rem;
     }
 
-    .hero {
+    .endGame h1 {
+        font-size: 5rem;
+    }
+}
+
+@media (max-width: 370px) {
+    .heroContainer {
         left: 5%;
     }
 
-    .endGame h1 {
-        font-size: 5rem;
+    .eventContainer {
+        left: 45%;
     }
 }
 
