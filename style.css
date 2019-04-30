@@ -53,6 +53,7 @@ body {
     width: 100%;
     color: white;
     font-size: 3rem;
+    z-index: 5;
 }
 
 .live {
@@ -71,6 +72,7 @@ body {
     color: white;
     font-size: 4rem;
     height: 6rem;
+    z-index: 5;
 }
 
 .flask {
@@ -98,7 +100,7 @@ body {
 .eventContainer {
     position: absolute;
     top: 50%;
-    left: 55%;
+    left: 50%;
     transform: translateY(-60%) scaleX(-1);
 }
 
@@ -109,7 +111,7 @@ body {
 .heroContainer {
     position: absolute;
     top: 50%;
-    left: 10%;
+    left: 8%;
     transform: translateY(-70%);
 }
 
@@ -144,7 +146,7 @@ body {
     margin: 0 0 5rem 0;
 }
 
-.panelLeft button,
+.shopButton,
 .endGame button {
     color: white;
     background: var(--colorRed);
@@ -154,13 +156,13 @@ body {
     outline: none;
 }
 
-.panelLeft button:active,
+.shopButton:active,
 .endGame button:active {
     box-shadow: 0rem 0.2rem dimgray;
     transform: translateY(0.2rem);
 }
 
-.panelLeft button {
+.shopButton {
     font-size: 3rem;
     width: 90%;
     height: 5rem;
@@ -177,7 +179,7 @@ body {
     width: 100%;
     height: 100%;
     background: var(--clorBlack);
-    z-index: 2;
+    z-index: 100;
 }
 
 .endGame button {
@@ -199,7 +201,8 @@ body {
 .damageMoob,
 .levelUp,
 .items,
-.flasksAdd {
+.flasksAdd,
+.exp {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -209,7 +212,7 @@ body {
     position: absolute;
     top: 0;
     width: 100%;
-    text-shadow: 0rem 0rem black;
+    text-shadow: 0rem 0rem 0.2rem black;
     animation: fly 1s;
 }
 
@@ -229,13 +232,49 @@ body {
 }
 
 .items,
-.flasksAdd {
+.flasksAdd,
+.exp {
     transform: scaleX(-1);
 }
 
 .flasksAdd {
     color: var(--colorFlask);
     animation: fly 2s 0.4s;
+}
+
+.exp {
+    color: var(--colorGold);
+    font-size: 2.5rem;
+    animation: fly 1.5s;
+}
+
+.shop {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: var(--clorBlack);
+}
+
+.shop div {
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+
+.weaponShop {
+    max-height: 15%;
+    margin: 3rem 0 0 0;
+}
+
+.weaponImg {
+    max-height: 100%;
+    margin: 0 2rem 0 0;
 }
 
 @keyframes fly {

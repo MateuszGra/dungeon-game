@@ -22,112 +22,112 @@
     }, {
         name: 'goblin',
         img: 'img/moobs/goblin_',
-        HP: 18,
+        HP: 35,
         minDamage: 0,
         maxDamage: 4,
         experience: 10,
     }, {
         name: 'imp',
         img: 'img/moobs/imp_',
-        HP: 10,
+        HP: 30,
         minDamage: 2,
         maxDamage: 6,
         experience: 12,
     }, {
         name: 'tiny zombie',
         img: 'img/moobs/tiny_zombie_',
-        HP: 20,
+        HP: 40,
         minDamage: 0,
         maxDamage: 4,
         experience: 10,
     }, {
         name: 'muddy',
         img: 'img/moobs/muddy_',
-        HP: 30,
+        HP: 60,
         minDamage: 2,
         maxDamage: 7,
         experience: 15,
     }, {
         name: 'swampy',
         img: 'img/moobs/swampy_',
-        HP: 35,
+        HP: 65,
         minDamage: 2,
         maxDamage: 7,
         experience: 15,
     }, {
         name: 'skelet',
         img: 'img/moobs/skelet_',
-        HP: 70,
+        HP: 110,
         minDamage: 3,
         maxDamage: 6,
         experience: 20,
     }, {
         name: 'zombie',
         img: 'img/moobs/zombie_',
-        HP: 50,
+        HP: 100,
         minDamage: 2,
         maxDamage: 7,
         experience: 20,
     }, {
         name: 'ice zombie',
         img: 'img/moobs/ice_zombie_',
-        HP: 70,
+        HP: 110,
         minDamage: 2,
         maxDamage: 8,
         experience: 30,
     }, {
         name: 'orc warrior',
         img: 'img/moobs/orc_warrior_',
-        HP: 80,
+        HP: 150,
         minDamage: 0,
         maxDamage: 10,
         experience: 32,
     }, {
         name: 'masked orc',
         img: 'img/moobs/masked_orc_',
-        HP: 85,
+        HP: 160,
         minDamage: 2,
         maxDamage: 15,
         experience: 40,
     }, {
         name: 'orc shaman',
         img: 'img/moobs/orc_shaman_',
-        HP: 50,
+        HP: 170,
         minDamage: 5,
         maxDamage: 12,
         experience: 40,
     }, {
         name: 'chort',
         img: 'img/moobs/chort_',
-        HP: 40,
+        HP: 130,
         minDamage: 0,
         maxDamage: 25,
         experience: 40,
     }, {
         name: 'necromancer',
         img: 'img/moobs/necromancer_',
-        HP: 60,
+        HP: 140,
         minDamage: 5,
         maxDamage: 25,
         experience: 45,
     }, {
         name: 'ogre',
         img: 'img/moobs/ogre_',
-        HP: 100,
+        HP: 500,
         minDamage: 4,
         maxDamage: 17,
         experience: 45,
     }, {
         name: 'big demon',
         img: 'img/moobs/big_demon_',
-        HP: 90,
+        HP: 500,
         minDamage: 4,
         maxDamage: 17,
         experience: 45,
     }, {
         name: 'big zombie',
         img: 'img/moobs/big_zombie_',
-        HP: 90,
+        HP: 500,
         minDamage: 4,
         maxDamage: 17,
         experience: 45,
@@ -137,81 +137,97 @@
         name: 'knife',
         minDamage: 1,
         maxDamage: 3,
+        price: 0,
         src: 'img/weapons/knife.png',
     }, {
         name: 'club with spikes',
         minDamage: 2,
         maxDamage: 5,
+        price: 10,
         src: 'img/weapons/club_with_spikes.png',
     }, {
         name: 'claver',
         minDamage: 3,
         maxDamage: 5,
+        price: 20,
         src: 'img/weapons/cleaver.png',
     }, {
         name: 'machete',
         minDamage: 3,
         maxDamage: 6,
+        price: 25,
         src: 'img/weapons/machete.png',
     }, {
         name: 'axe',
         minDamage: 4,
         maxDamage: 7,
+        price: 30,
         src: 'img/weapons/axe.png',
     }, {
         name: 'rusty sword',
         minDamage: 5,
         maxDamage: 10,
+        price: 40,
         src: 'img/weapons/rusty_sword.png',
     }, {
         name: 'regular sword',
         minDamage: 6,
         maxDamage: 12,
+        price: 50,
         src: 'img/weapons/regular_sword.png',
     }, {
         name: 'mace',
         minDamage: 5,
         maxDamage: 15,
+        price: 60,
         src: 'img/weapons/mace.png',
     }, {
         name: 'duel sword',
         minDamage: 7,
         maxDamage: 15,
+        price: 70,
         src: 'img/weapons/duel_sword.png',
     }, {
         name: 'saw sword',
         minDamage: 10,
         maxDamage: 18,
+        price: 100,
         src: 'img/weapons/saw_sword.png',
     }, {
         name: 'katana',
         minDamage: 13,
         maxDamage: 19,
+        price: 120,
         src: 'img/weapons/katana.png',
     }, {
         name: 'red gem sword',
         minDamage: 15,
         maxDamage: 22,
+        price: 150,
         src: 'img/weapons/red_gem_sword.png',
     }, {
         name: 'knight sword',
         minDamage: 15,
         maxDamage: 26,
+        price: 180,
         src: 'img/weapons/knight_sword.png',
     }, {
         name: 'golden sword',
         minDamage: 17,
         maxDamage: 28,
+        price: 200,
         src: 'img/weapons/golden_sword.png',
     }, {
         name: 'giant sword',
         minDamage: 8,
         maxDamage: 40,
+        price: 350,
         src: 'img/weapons/giant_sword.png',
     }, {
         name: 'two-handed golden sword',
         minDamage: 20,
         maxDamage: 32,
+        price: 350,
         src: 'img/weapons/two_handed_golden_sword.png',
     }, ];
 
@@ -234,6 +250,11 @@
     const endGameButton = document.querySelector('.endGame button');
     const heroContainer = document.querySelector('.heroContainer');
     const eventContainer = document.querySelector('.eventContainer');
+    const shop = document.querySelector('.shop');
+    const shopButton = document.querySelector('.shopButton');
+    const weaponShop = document.querySelectorAll('.weaponShop');
+    const flaskShop = document.querySelector('.flaskShop');
+    const weaponUse = document.querySelector('.weaponUse');
 
     function lottery(min, max) {
         min = Math.ceil(min);
@@ -244,7 +265,7 @@
     function createDangeon() {
         const floors = document.querySelectorAll('.floor');
         const floorTop = document.querySelectorAll('.floorTop');
-        for (i = 0; i < floors.length; i++) {
+        for (let i = 0; i < floors.length; i++) {
             if (lottery(0, 9) > 7) {
                 floors[i].src = 'img/floor/floor_' + lottery(0, 7) + '.png';
             } else {
@@ -254,7 +275,7 @@
         const walls = document.querySelectorAll('.wall');
         const wallBottom = document.querySelectorAll('.wallBottom');
         const wallTop = document.querySelectorAll('.wallTop');
-        for (i = 0; i < walls.length; i++) {
+        for (let i = 0; i < walls.length; i++) {
             if (lottery(0, 9) > 6) {
                 walls[i].src = 'img/wall/wall_' + lottery(0, 3) + '.png';
             } else {
@@ -262,7 +283,7 @@
             }
         }
 
-        for (i = 0; i < wallBottom.length; i++) {
+        for (let i = 0; i < wallBottom.length; i++) {
             if (lottery(0, 9) > 7) {
                 let lot = lottery(0, 7);
                 wallBottom[i].src = 'img/wall/wall_' + lot + '.png';
@@ -288,10 +309,15 @@
 
     function event() {
         let heroPower;
+
         if (hero.level < 4) {
             heroPower = 5;
         } else if (hero.level < 6) {
-            heroPower = 9;
+            heroPower = 7;
+        } else if (hero.level < 10) {
+            heroPower = 10;
+        } else if (hero.level < 15) {
+            heroPower = 15;
         } else {
             heroPower = moobs.length;
         }
@@ -318,10 +344,7 @@
         if (style == 'items') {
             const coinAdd = document.createElement('img');
             log.appendChild(coinAdd);
-            const coinsImg = document.querySelectorAll('.' + style + ' img');
-            for (i = 0; i < coinsImg.length; i++) {
-                coinsImg[i].src = 'img/icons/coin_0.png';
-            }
+            coinAdd.classList.add('money');
 
         } else if (style == 'flasksAdd') {
             const flaskAdd = document.createElement('img');
@@ -340,7 +363,7 @@
 
     function createFlask() {
         while (hero.flasks > 0) {
-            for (i = 0; i < flaskHtml.length; i++) {
+            for (let i = 0; i < flaskHtml.length; i++) {
                 if (flaskHtml[i].classList[1] != 'full') {
                     if (hero.flasks > 0) {
                         flaskHtml[i].classList.add('full');
@@ -361,9 +384,14 @@
         if (number >= 4) {
             number = 0;
         }
+
         hero.html.src = hero.img + number + '.png';
         eventHtml.src = moobs[eventLot].img + number + '.png';
-        document.querySelector('.coin').src = 'img/icons/coin_' + number + '.png';
+        const money = document.querySelectorAll('.money');
+
+        for (let i = 0; i < money.length; i++) {
+            money[i].src = 'img/icons/coin_' + number + '.png';
+        }
     }
     setInterval(() => {
         animate();
@@ -377,10 +405,11 @@
         hero.weapon = 0;
         hero.flasks = 3;
         hero.gold = 0;
+        weaponUse.src = weapons[0].src;
 
         liveLevel();
 
-        for (i = 0; i < flaskHtml.length; i++) {
+        for (let i = 0; i < flaskHtml.length; i++) {
             flaskHtml[i].classList.remove('full');
         }
 
@@ -421,7 +450,8 @@
 
     function levelUp() {
         const exp = 100;
-        if (hero.experience > exp * hero.level + 0.35 * hero.experience) {
+        const expLine = document.querySelector('.experience');
+        if (hero.experience > exp * hero.level + 0.35 * hero.experience && hero.level < 1000) {
             hero.level++;
             levelHtml.textContent = hero.level;
             hero.maxHP += 5;
@@ -437,6 +467,9 @@
             hero.HP = hero.HP - damageMoob;
             let damageHero = lottery(weapons[hero.weapon].minDamage, weapons[hero.weapon].maxDamage) + lottery(1, 6) + hero.level;
             eventHP = eventHP - damageHero;
+            if (eventHP < 0) {
+                eventHP = 0;
+            }
             eventHpHtml.style.width = (eventHP / eventFullHp * 100) + '%';
 
             if ((eventHP / eventFullHp * 100) >= 90) {
@@ -458,14 +491,24 @@
             hero.flasks = lottery(0, 4);
             CrateInscription(eventContainer, hero.flasks, 'flasksAdd');
             createFlask();
-            let goldAdd = lottery(0, 15) + lottery(0, hero.level);
+            let goldAdd = lottery(1, 18) + lottery(0, hero.level);
             hero.gold = hero.gold + goldAdd;
+            if (hero.gold > 99999) {
+                hero.gold = 99999;
+            }
+
             gold.textContent = hero.gold;
             CrateInscription(eventContainer, goldAdd, 'items');
         }
 
-        if (eventHP <= 0 || eventLot <= 1) {
-            hero.experience = hero.experience + moobs[eventLot].experience + hero.level;
+        if (eventLot <= 1) {
+            createDangeon();
+            event();
+        }
+
+        if (eventHP == 0 && eventLot > 1) {
+            CrateInscription(eventContainer, moobs[eventLot].experience + 'exp', 'exp');
+            hero.experience = hero.experience + moobs[eventLot].experience;
             levelUp();
             createDangeon();
             event();
@@ -478,7 +521,7 @@
     eventHtml.addEventListener('click', eventClick);
     eventHtml.addEventListener('touch', eventClick);
 
-    for (i = 0; i < flaskHtml.length; i++) {
+    for (let i = 0; i < flaskHtml.length; i++) {
         flaskHtml[i].addEventListener('click', function (e) {
             if (this.classList[1] == 'full' && hero.HP < hero.maxHP) {
                 this.classList.remove('full');
@@ -514,6 +557,56 @@
 
     endGameButton.addEventListener('click', endGameButtonClick);
     endGameButton.addEventListener('touch', endGameButtonClick);
+
+
+    let weaponToBuy = [];
+
+    function whatInShop() {
+        const weaponsImg = document.querySelectorAll('.weaponImg');
+        const weaponInfo = document.querySelectorAll('.weaponInfo');
+        let n = hero.level;
+        if (n > weapons.length - 3) {
+            n = weapons.length - 3
+        }
+
+        for (let i = 0; i < weaponsImg.length; i++) {
+            weaponsImg[i].src = weapons[i + n].src;
+            weaponInfo[i].textContent = weapons[i + n].minDamage + '-' + weapons[i + n].maxDamage + 'dmg ' + weapons[i + n].price + 'x ';
+            weaponToBuy[i] = i + n;
+        }
+    }
+
+    for (let i = 0; i < weaponShop.length; i++) {
+        weaponShop[i].addEventListener('click', function (e) {
+            if (hero.gold >= weapons[weaponToBuy[i]].price && hero.weapon != weaponToBuy[i]) {
+                hero.gold -= weapons[weaponToBuy[i]].price;
+                hero.weapon = weaponToBuy[i];
+                weaponUse.src = weapons[weaponToBuy[i]].src;
+                gold.textContent = hero.gold;
+            }
+        });
+    }
+
+    shopButton.addEventListener('click', function (e) {
+        shop.classList.toggle('none');
+        whatInShop();
+    });
+    shopButton.addEventListener('touch', function (e) {
+        shop.classList.toggle('none');
+        whatInShop();
+    });
+
+    function buyFlask() {
+        if (hero.gold >= 10 && flaskHtml[0].classList[1] != 'full' || hero.gold >= 10 && flaskHtml[1].classList[1] != 'full' || hero.gold >= 10 && flaskHtml[2].classList[1] != 'full' || hero.gold >= 10 && flaskHtml[3].classList[1] != 'full' || hero.gold >= 10 && flaskHtml[4].classList[1] != 'full') {
+            hero.gold -= 10;
+            hero.flasks = 1;
+            createFlask();
+            gold.textContent = hero.gold;
+        }
+    }
+
+    flaskShop.addEventListener('click', buyFlask);
+    flaskShop.addEventListener('touch', buyFlask);
 
     event();
     createDangeon();
