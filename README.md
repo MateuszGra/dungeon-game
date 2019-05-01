@@ -1,7 +1,5 @@
 # dungeon-game
-RANDOM DANGEON
-
-RPG/clicker game.
+RANDOM DANGEON- RPG/clicker game.
 
 live: https://mateuszgra.github.io/dungeon-game/
 
