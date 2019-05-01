@@ -1,5 +1,6 @@
 # dungeon-game
 RANDOM DANGEON
+
 RPG/clicker game.
 
 live: https://mateuszgra.github.io/dungeon-game/
