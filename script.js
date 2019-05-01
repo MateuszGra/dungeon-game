@@ -247,7 +247,7 @@
     const eventFullHpHtml = document.querySelector('.eventFullHp');
     const flaskHtml = document.querySelectorAll('.flask');
     const endGame = document.querySelector('.endGame');
-    const endGameButton = document.querySelector('.endGame button');
+    const endGameButton = document.querySelector('.newGameButton');
     const heroContainer = document.querySelector('.heroContainer');
     const eventContainer = document.querySelector('.eventContainer');
     const shop = document.querySelector('.shop');
@@ -255,6 +255,7 @@
     const weaponShop = document.querySelectorAll('.weaponShop');
     const flaskShop = document.querySelector('.flaskShop');
     const weaponUse = document.querySelector('.weaponUse');
+    const continueHtml = document.querySelector('.continue');
 
     function lottery(min, max) {
         min = Math.ceil(min);
@@ -460,6 +461,25 @@
             CrateInscription(heroContainer, 'LEVEL UP!', 'levelUp');
         }
     }
+
+    function save() {
+        localStorage.setItem('experience', hero.experience);
+        localStorage.setItem('level', hero.level);
+        localStorage.setItem('maxHP', hero.maxHP);
+        localStorage.setItem('HP', hero.HP);
+        localStorage.setItem('weapon', hero.weapon);
+        localStorage.setItem('gold', hero.gold);
+
+        let flaskLoop = 0;
+        for (let i = 0; i < flaskHtml.length; i++) {
+            if (flaskHtml[i].classList[1] == 'full') {
+                flaskLoop++;
+            }
+        }
+
+        localStorage.setItem('flasks', flaskLoop);
+    }
+
     //events
     function eventClick() {
         if (eventLot > 1) {
@@ -516,6 +536,12 @@
 
         liveLevel();
         hpHtml.textContent = hero.HP + '/' + hero.maxHP;
+        save();
+        if (parseInt(localStorage.getItem('HP')) != 0 && localStorage.getItem('HP') != null) {
+            continueHtml.classList.remove('none');
+        } else {
+            continueHtml.classList.add('none');
+        }
     }
 
     eventHtml.addEventListener('click', eventClick);
@@ -534,6 +560,7 @@
             }
             hpHtml.textContent = hero.HP + '/' + hero.maxHP;
             liveLevel();
+            save();
         });
         flaskHtml[i].addEventListener('touch', function (e) {
             if (this.classList[1] == 'full' && hero.HP < hero.maxHP) {
@@ -547,6 +574,7 @@
             }
             hpHtml.textContent = hero.HP + '/' + hero.maxHP;
             liveLevel();
+            save();
         });
     }
 
@@ -557,6 +585,32 @@
 
     endGameButton.addEventListener('click', endGameButtonClick);
     endGameButton.addEventListener('touch', endGameButtonClick);
+
+    function load() {
+        endGame.classList.add('none');
+
+        hero.experience = parseInt(localStorage.getItem('experience'));
+        hero.level = parseInt(localStorage.getItem('level'));
+        hero.maxHP = parseInt(localStorage.getItem('maxHP'));
+        hero.HP = parseInt(localStorage.getItem('HP'));
+        hero.weapon = parseInt(localStorage.getItem('weapon'));
+        hero.gold = parseInt(localStorage.getItem('gold'));
+        hero.flasks = parseInt(localStorage.getItem('flasks'));
+        createFlask();
+        liveLevel();
+
+        weaponUse.src = weapons[hero.weapon].src;
+        hpHtml.textContent = hero.HP + '/' + hero.maxHP;
+        gold.textContent = hero.gold;
+        levelHtml.textContent = hero.level;
+    }
+
+    if (parseInt(localStorage.getItem('HP')) != 0 && localStorage.getItem('HP') != null) {
+        continueHtml.classList.remove('none');
+    }
+
+    continueHtml.addEventListener('click', load);
+    continueHtml.addEventListener('touch', load);
 
 
     let weaponToBuy = [];
@@ -590,10 +644,12 @@
     shopButton.addEventListener('click', function (e) {
         shop.classList.toggle('none');
         whatInShop();
+        save();
     });
     shopButton.addEventListener('touch', function (e) {
         shop.classList.toggle('none');
         whatInShop();
+        save();
     });
 
     function buyFlask() {
@@ -602,6 +658,7 @@
             hero.flasks = 1;
             createFlask();
             gold.textContent = hero.gold;
+            save();
         }
     }
 

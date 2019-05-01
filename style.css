@@ -147,7 +147,8 @@ body {
 }
 
 .shopButton,
-.endGame button {
+.newGameButton,
+.continue {
     color: white;
     background: var(--colorRed);
     font-family: 'VT323', monospace;
@@ -157,7 +158,8 @@ body {
 }
 
 .shopButton:active,
-.endGame button:active {
+.newGameButton:active,
+.continue:active {
     box-shadow: 0rem 0.2rem dimgray;
     transform: translateY(0.2rem);
 }
@@ -182,11 +184,19 @@ body {
     z-index: 100;
 }
 
-.endGame button {
-    margin: 5rem 0 0 0;
+.newGameButton,
+.continue {
     font-size: 3rem;
     border-radius: 1rem;
     padding: 1rem;
+}
+
+.newGameButton {
+    margin: 4rem 0 0 0;
+}
+
+.continue {
+    margin: 2rem 0 0 0;
 }
 
 .endGame h1 {
