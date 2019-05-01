@@ -256,6 +256,7 @@
     const flaskShop = document.querySelector('.flaskShop');
     const weaponUse = document.querySelector('.weaponUse');
     const continueHtml = document.querySelector('.continue');
+    const expLine = document.querySelector('.experience');
 
     function lottery(min, max) {
         min = Math.ceil(min);
@@ -450,15 +451,14 @@
     }
 
     function levelUp() {
-        const exp = 100;
-        const expLine = document.querySelector('.experience');
-        if (hero.experience > exp * hero.level + 0.35 * hero.experience && hero.level < 1000) {
+        if (hero.experience > (100 * hero.level + 35 * hero.level) && hero.level < 1000) {
             hero.level++;
             levelHtml.textContent = hero.level;
             hero.maxHP += 5;
             hero.HP += 5;
             hpHtml.textContent = hero.HP + '/' + hero.maxHP;
             CrateInscription(heroContainer, 'LEVEL UP!', 'levelUp');
+            expLine.style.width = ((hero.experience - (135 * (hero.level - 1))) / ((135 * hero.level) - (135 * (hero.level - 1)))) * 100 + '%';
         }
     }
 
@@ -509,8 +509,10 @@
 
         } else if (eventLot == 1) {
             hero.flasks = lottery(0, 4);
-            CrateInscription(eventContainer, hero.flasks, 'flasksAdd');
-            createFlask();
+            if (hero.flasks > 0) {
+                CrateInscription(eventContainer, hero.flasks, 'flasksAdd');
+                createFlask();
+            }
             let goldAdd = lottery(1, 18) + lottery(0, hero.level);
             hero.gold = hero.gold + goldAdd;
             if (hero.gold > 99999) {
@@ -529,6 +531,8 @@
         if (eventHP == 0 && eventLot > 1) {
             CrateInscription(eventContainer, moobs[eventLot].experience + 'exp', 'exp');
             hero.experience = hero.experience + moobs[eventLot].experience;
+            expLine.style.width = ((hero.experience - (135 * (hero.level - 1))) / ((135 * hero.level) - (135 * (hero.level - 1)))) * 100 + '%';
+
             levelUp();
             createDangeon();
             event();
@@ -581,6 +585,7 @@
     function endGameButtonClick() {
         endGame.classList.add('none');
         reset();
+        expLine.style.width = ((hero.experience - (135 * (hero.level - 1))) / ((135 * hero.level) - (135 * (hero.level - 1)))) * 100 + '%';
     }
 
     endGameButton.addEventListener('click', endGameButtonClick);
@@ -603,6 +608,7 @@
         hpHtml.textContent = hero.HP + '/' + hero.maxHP;
         gold.textContent = hero.gold;
         levelHtml.textContent = hero.level;
+        expLine.style.width = ((hero.experience - (135 * (hero.level - 1))) / ((135 * hero.level) - (135 * (hero.level - 1)))) * 100 + '%';
     }
 
     if (parseInt(localStorage.getItem('HP')) != 0 && localStorage.getItem('HP') != null) {
