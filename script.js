@@ -1,4 +1,4 @@
-(function () {
+(() => {
     const hero = {
         name: 'name',
         level: 1,
@@ -380,7 +380,7 @@
 
         }
 
-        log.addEventListener('animationend', function (e) {
+        log.addEventListener('animationend', (e) => {
             log.remove();
         });
     }
@@ -632,7 +632,7 @@
     }
 
     for (let i = 0; i < weaponShop.length; i++) {
-        weaponShop[i].addEventListener('click', function (e) {
+        weaponShop[i].addEventListener('click', (e) => {
             if (hero.gold >= weapons[weaponToBuy[i]].price && hero.weapon != weaponToBuy[i]) {
                 hero.gold -= weapons[weaponToBuy[i]].price;
                 hero.weapon = weaponToBuy[i];
@@ -643,12 +643,12 @@
         });
     }
 
-    shopButton.addEventListener('click', function (e) {
+    shopButton.addEventListener('click', (e) => {
         shop.classList.toggle('none');
         whatInShop();
         save();
     });
-    shopButton.addEventListener('touch', function (e) {
+    shopButton.addEventListener('touch', (e) => {
         shop.classList.toggle('none');
         whatInShop();
         save();
