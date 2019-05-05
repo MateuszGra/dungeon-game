@@ -142,6 +142,11 @@ body {
     font-size: 3rem;
 }
 
+.weaponDamage {
+    margin: 0.5rem 0 0 0;
+    font-size: 2rem;
+}
+
 .level {
     margin: 0 0 5rem 0;
 }
@@ -278,7 +283,7 @@ body {
 }
 
 .weaponShop {
-    max-height: 15%;
+    max-height: 12%;
     margin: 3rem 0 0 0;
 }
 

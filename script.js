@@ -257,14 +257,39 @@
     const weaponUse = document.querySelector('.weaponUse');
     const continueHtml = document.querySelector('.continue');
     const expLine = document.querySelector('.experience');
+    const weaponDamage = document.querySelector('.weaponDamage')
 
-    function lottery(min, max) {
+    let eventLot;
+    let eventHP;
+    let eventFullHp;
+
+    //animations
+    let number = -1;
+
+    setInterval(() => {
+        number++;
+
+        if (number >= 4) {
+            number = 0;
+        }
+
+        hero.html.src = hero.img + number + '.png';
+        eventHtml.src = moobs[eventLot].img + number + '.png';
+        const money = document.querySelectorAll('.money');
+
+        for (let i = 0; i < money.length; i++) {
+            money[i].src = 'img/icons/coin_' + number + '.png';
+        }
+    }, 150);
+    ///////////
+
+    lottery = (min, max) => {
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min)) + min;
     }
 
-    function createDangeon() {
+    createDangeon = () => {
         const floors = document.querySelectorAll('.floor');
         const floorTop = document.querySelectorAll('.floorTop');
         for (let i = 0; i < floors.length; i++) {
@@ -305,11 +330,8 @@
             }
         }
     }
-    let eventLot;
-    let eventHP;
-    let eventFullHp;
 
-    function event() {
+    event = () => {
         let heroPower;
 
         if (hero.level < 4) {
@@ -338,7 +360,7 @@
         }
     }
 
-    function CrateInscription(where, text, style) {
+    CrateInscription = (where, text, style) => {
         let log = document.createElement('div');
         where.appendChild(log);
         log.textContent = text;
@@ -363,7 +385,7 @@
         });
     }
 
-    function createFlask() {
+    createFlask = () => {
         while (hero.flasks > 0) {
             for (let i = 0; i < flaskHtml.length; i++) {
                 if (flaskHtml[i].classList[1] != 'full') {
@@ -377,29 +399,7 @@
         }
     }
 
-    //animations
-    let number = -1;
-
-    function animate() {
-        number++;
-
-        if (number >= 4) {
-            number = 0;
-        }
-
-        hero.html.src = hero.img + number + '.png';
-        eventHtml.src = moobs[eventLot].img + number + '.png';
-        const money = document.querySelectorAll('.money');
-
-        for (let i = 0; i < money.length; i++) {
-            money[i].src = 'img/icons/coin_' + number + '.png';
-        }
-    }
-    setInterval(() => {
-        animate();
-    }, 150);
-
-    function reset() {
+    reset = () => {
         hero.experience = 0;
         hero.level = 1;
         hero.maxHP = 100;
@@ -408,6 +408,8 @@
         hero.flasks = 3;
         hero.gold = 0;
         weaponUse.src = weapons[0].src;
+        weaponDamage.textContent = weapons[hero.weapon].minDamage + '-' + weapons[hero.weapon].maxDamage + 'dmg';
+        levelBefore = hero.experience;
 
         liveLevel();
 
@@ -423,7 +425,7 @@
         hpHtml.textContent = hero.HP + '/' + hero.maxHP;
     }
 
-    function liveLevel() {
+    liveLevel = () => {
         if (hero.HP >= 0.5 * hero.maxHP) {
             liveHtml.src = 'img/icons/heart_0.png';
         } else if (hero.HP <= 0.05 * hero.maxHP) {
@@ -449,26 +451,28 @@
             heroHpHtml.style.backgroundColor = "var(--colorRed)";
         }
     }
-
-    function levelUp() {
-        if (hero.experience > (100 * hero.level + 35 * hero.level) && hero.level < 1000) {
+    let levelBefore = hero.experience;
+    levelUp = () => {
+        if (hero.experience > levelBefore + 135 * hero.level && hero.level < 1000) {
+            levelBefore = hero.experience;
             hero.level++;
             levelHtml.textContent = hero.level;
             hero.maxHP += 5;
             hero.HP += 5;
             hpHtml.textContent = hero.HP + '/' + hero.maxHP;
             CrateInscription(heroContainer, 'LEVEL UP!', 'levelUp');
-            expLine.style.width = ((hero.experience - (135 * (hero.level - 1))) / ((135 * hero.level) - (135 * (hero.level - 1)))) * 100 + '%';
+            expLine.style.width = ((hero.experience - levelBefore) / (135 * hero.level)) * 100 + '%';
         }
     }
 
-    function save() {
+    save = () => {
         localStorage.setItem('experience', hero.experience);
         localStorage.setItem('level', hero.level);
         localStorage.setItem('maxHP', hero.maxHP);
         localStorage.setItem('HP', hero.HP);
         localStorage.setItem('weapon', hero.weapon);
         localStorage.setItem('gold', hero.gold);
+        localStorage.setItem('levelBefore', levelBefore);
 
         let flaskLoop = 0;
         for (let i = 0; i < flaskHtml.length; i++) {
@@ -481,7 +485,7 @@
     }
 
     //events
-    function eventClick() {
+    eventClick = () => {
         if (eventLot > 1) {
             let damageMoob = lottery(moobs[eventLot].minDamage, moobs[eventLot].maxDamage);
             hero.HP = hero.HP - damageMoob;
@@ -531,7 +535,7 @@
         if (eventHP == 0 && eventLot > 1) {
             CrateInscription(eventContainer, moobs[eventLot].experience + 'exp', 'exp');
             hero.experience = hero.experience + moobs[eventLot].experience;
-            expLine.style.width = ((hero.experience - (135 * (hero.level - 1))) / ((135 * hero.level) - (135 * (hero.level - 1)))) * 100 + '%';
+            expLine.style.width = ((hero.experience - levelBefore) / (135 * hero.level)) * 100 + '%';
 
             levelUp();
             createDangeon();
@@ -552,9 +556,9 @@
     eventHtml.addEventListener('touch', eventClick);
 
     for (let i = 0; i < flaskHtml.length; i++) {
-        flaskHtml[i].addEventListener('click', function (e) {
-            if (this.classList[1] == 'full' && hero.HP < hero.maxHP) {
-                this.classList.remove('full');
+        flaskClick = () => {
+            if (flaskHtml[i].classList[1] == 'full' && hero.HP < hero.maxHP) {
+                flaskHtml[i].classList.remove('full');
                 let addHp = Math.round((hero.maxHP / 4) + lottery(0, (hero.maxHP / 3)))
                 hero.HP = hero.HP + addHp;
                 CrateInscription(heroContainer, '+' + addHp, 'damage');
@@ -565,33 +569,22 @@
             hpHtml.textContent = hero.HP + '/' + hero.maxHP;
             liveLevel();
             save();
-        });
-        flaskHtml[i].addEventListener('touch', function (e) {
-            if (this.classList[1] == 'full' && hero.HP < hero.maxHP) {
-                this.classList.remove('full');
-                let addHp = Math.round((hero.maxHP / 4) + lottery(0, (hero.maxHP / 3)))
-                hero.HP = hero.HP + addHp;
-                CrateInscription(heroContainer, '+' + addHp, 'damage');
-                if (hero.HP > hero.maxHP) {
-                    hero.HP = hero.maxHP;
-                }
-            }
-            hpHtml.textContent = hero.HP + '/' + hero.maxHP;
-            liveLevel();
-            save();
-        });
+        }
+
+        flaskHtml[i].addEventListener('click', flaskClick);
+        flaskHtml[i].addEventListener('touch', flaskClick);
     }
 
-    function endGameButtonClick() {
+    endGameButtonClick = () => {
         endGame.classList.add('none');
         reset();
-        expLine.style.width = ((hero.experience - (135 * (hero.level - 1))) / ((135 * hero.level) - (135 * (hero.level - 1)))) * 100 + '%';
+        expLine.style.width = ((hero.experience - levelBefore) / (135 * hero.level)) * 100 + '%';
     }
 
     endGameButton.addEventListener('click', endGameButtonClick);
     endGameButton.addEventListener('touch', endGameButtonClick);
 
-    function load() {
+    load = () => {
         endGame.classList.add('none');
 
         hero.experience = parseInt(localStorage.getItem('experience'));
@@ -601,14 +594,16 @@
         hero.weapon = parseInt(localStorage.getItem('weapon'));
         hero.gold = parseInt(localStorage.getItem('gold'));
         hero.flasks = parseInt(localStorage.getItem('flasks'));
+        levelBefore = parseInt(localStorage.getItem('levelBefore'))
         createFlask();
         liveLevel();
 
         weaponUse.src = weapons[hero.weapon].src;
+        weaponDamage.textContent = weapons[hero.weapon].minDamage + '-' + weapons[hero.weapon].maxDamage + 'dmg';
         hpHtml.textContent = hero.HP + '/' + hero.maxHP;
         gold.textContent = hero.gold;
         levelHtml.textContent = hero.level;
-        expLine.style.width = ((hero.experience - (135 * (hero.level - 1))) / ((135 * hero.level) - (135 * (hero.level - 1)))) * 100 + '%';
+        expLine.style.width = ((hero.experience - levelBefore) / (135 * hero.level)) * 100 + '%';
     }
 
     if (parseInt(localStorage.getItem('HP')) != 0 && localStorage.getItem('HP') != null) {
@@ -621,7 +616,7 @@
 
     let weaponToBuy = [];
 
-    function whatInShop() {
+    whatInShop = () => {
         const weaponsImg = document.querySelectorAll('.weaponImg');
         const weaponInfo = document.querySelectorAll('.weaponInfo');
         let n = hero.level;
@@ -642,6 +637,7 @@
                 hero.gold -= weapons[weaponToBuy[i]].price;
                 hero.weapon = weaponToBuy[i];
                 weaponUse.src = weapons[weaponToBuy[i]].src;
+                weaponDamage.textContent = weapons[hero.weapon].minDamage + '-' + weapons[hero.weapon].maxDamage + 'dmg';
                 gold.textContent = hero.gold;
             }
         });
@@ -658,7 +654,7 @@
         save();
     });
 
-    function buyFlask() {
+    buyFlask = () => {
         if (hero.gold >= 10 && flaskHtml[0].classList[1] != 'full' || hero.gold >= 10 && flaskHtml[1].classList[1] != 'full' || hero.gold >= 10 && flaskHtml[2].classList[1] != 'full' || hero.gold >= 10 && flaskHtml[3].classList[1] != 'full' || hero.gold >= 10 && flaskHtml[4].classList[1] != 'full') {
             hero.gold -= 10;
             hero.flasks = 1;
