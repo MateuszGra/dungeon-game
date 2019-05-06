@@ -352,7 +352,7 @@
             eventFullHp = eventHP;
             eventHpHtml.style.width = (eventHP / eventFullHp * 100) + '%';
             eventFullHpHtml.style.width = 100 + '%';
-            eventHpHtml.style.backgroundColor = "var(--fullHp)";
+            eventHpHtml.style.backgroundColor = 'var(--fullHp)';
         } else {
             eventLot = lottery(0, 2);
             eventHpHtml.style.width = 0 + '%';
@@ -554,25 +554,28 @@
 
     eventHtml.addEventListener('click', eventClick);
     eventHtml.addEventListener('touch', eventClick);
+    flaskClick = n => {
+        if (flaskHtml[n].classList[1] == 'full' && hero.HP < hero.maxHP) {
+            flaskHtml[n].classList.remove('full');
+            let addHp = Math.round((hero.maxHP / 4) + lottery(0, (hero.maxHP / 3)))
+            hero.HP += addHp;
+            CrateInscription(heroContainer, '+' + addHp, 'damage');
+            if (hero.HP > hero.maxHP) {
+                hero.HP = hero.maxHP;
+            }
+        }
+        hpHtml.textContent = hero.HP + '/' + hero.maxHP;
+        liveLevel();
+        save();
+    }
 
     for (let i = 0; i < flaskHtml.length; i++) {
-        flaskClick = () => {
-            if (flaskHtml[i].classList[1] == 'full' && hero.HP < hero.maxHP) {
-                flaskHtml[i].classList.remove('full');
-                let addHp = Math.round((hero.maxHP / 4) + lottery(0, (hero.maxHP / 3)))
-                hero.HP = hero.HP + addHp;
-                CrateInscription(heroContainer, '+' + addHp, 'damage');
-                if (hero.HP > hero.maxHP) {
-                    hero.HP = hero.maxHP;
-                }
-            }
-            hpHtml.textContent = hero.HP + '/' + hero.maxHP;
-            liveLevel();
-            save();
-        }
-
-        flaskHtml[i].addEventListener('click', flaskClick);
-        flaskHtml[i].addEventListener('touch', flaskClick);
+        flaskHtml[i].addEventListener('click', (e) => {
+            flaskClick(i);
+        });
+        flaskHtml[i].addEventListener('touch', (e) => {
+            flaskClick(i);
+        });
     }
 
     endGameButtonClick = () => {
