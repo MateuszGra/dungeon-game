@@ -101,14 +101,14 @@
         img: 'img/moobs/chort_',
         HP: 130,
         minDamage: 0,
-        maxDamage: 25,
+        maxDamage: 20,
         experience: 40,
     }, {
         name: 'necromancer',
         img: 'img/moobs/necromancer_',
         HP: 140,
         minDamage: 5,
-        maxDamage: 25,
+        maxDamage: 20,
         experience: 45,
     }, {
         name: 'ogre',
@@ -219,15 +219,15 @@
         src: 'img/weapons/golden_sword.png',
     }, {
         name: 'giant sword',
-        minDamage: 8,
+        minDamage: 15,
         maxDamage: 40,
         price: 350,
         src: 'img/weapons/giant_sword.png',
     }, {
         name: 'two-handed golden sword',
         minDamage: 20,
-        maxDamage: 32,
-        price: 350,
+        maxDamage: 41,
+        price: 400,
         src: 'img/weapons/two_handed_golden_sword.png',
     }, ];
 
@@ -258,6 +258,8 @@
     const continueHtml = document.querySelector('.continue');
     const expLine = document.querySelector('.experience');
     const weaponDamage = document.querySelector('.weaponDamage')
+    const keyboard = document.querySelector('.keyboard');
+    const keyboardMenu = document.querySelector('.keyboardMenu');
 
     let eventLot;
     let eventHP;
@@ -642,6 +644,7 @@
                 weaponUse.src = weapons[weaponToBuy[i]].src;
                 weaponDamage.textContent = weapons[hero.weapon].minDamage + '-' + weapons[hero.weapon].maxDamage + 'dmg';
                 gold.textContent = hero.gold;
+                save();
             }
         });
     }
@@ -649,12 +652,10 @@
     shopButton.addEventListener('click', (e) => {
         shop.classList.toggle('none');
         whatInShop();
-        save();
     });
     shopButton.addEventListener('touch', (e) => {
         shop.classList.toggle('none');
         whatInShop();
-        save();
     });
 
     buyFlask = () => {
@@ -669,6 +670,34 @@
 
     flaskShop.addEventListener('click', buyFlask);
     flaskShop.addEventListener('touch', buyFlask);
+
+    document.addEventListener("keyup", event => {
+        if (endGame.classList[1] == 'none') {
+            if (shop.classList[1] == 'none') {
+                if (event.code == 'Enter' || event.code == 'Space') {
+                    eventClick();
+                }
+            }
+
+            for (let i = 0; i < flaskHtml.length; i++) {
+                if (event.code == 'Digit' + (1 + i)) {
+                    flaskClick(i);
+                }
+            }
+
+            if (event.code == 'Escape') {
+                shop.classList.toggle('none');
+                whatInShop();
+            }
+        }
+    });
+
+    keyboard.addEventListener('click', (e) => {
+        keyboardMenu.classList.toggle('none');
+    });
+    keyboard.addEventListener('touch', (e) => {
+        keyboardMenu.classList.toggle('none');
+    });
 
     event();
     createDangeon();

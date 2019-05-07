@@ -25,6 +25,7 @@ body {
     justify-content: center;
     flex-direction: row;
     min-height: 100vh;
+    user-select: none;
 }
 
 .gamarea {
@@ -158,8 +159,9 @@ body {
     background: var(--colorRed);
     font-family: 'VT323', monospace;
     border: none;
-    box-shadow: 0rem 0.4rem lightgrey;
+    box-shadow: 0 0.4rem lightgrey;
     outline: none;
+    cursor: pointer;
 }
 
 .shopButton:active,
@@ -172,19 +174,21 @@ body {
 .shopButton {
     font-size: 3rem;
     width: 90%;
-    height: 5rem;
+    height: 4.5rem;
     border-radius: 1rem;
     margin: 5rem 0 0 0;
-    cursor: pointer;
+    text-align: center;
+    line-height: 4.5rem;
 }
 
 .endGame {
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: absolute;
-    width: 100%;
-    height: 100%;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
     background: var(--clorBlack);
     z-index: 100;
 }
@@ -194,6 +198,32 @@ body {
     font-size: 3rem;
     border-radius: 1rem;
     padding: 1rem;
+}
+
+.keyboardImg {
+    width: 8rem;
+}
+
+.keyboard {
+    margin: 3rem 0 0 0;
+    position: relative;
+    cursor: pointer;
+}
+
+.keyboardMenu {
+    box-sizing: border-box;
+    position: absolute;
+    color: white;
+    font-size: 2rem;
+    background: var(--clorBlack);
+    border: 0.2rem var(--colorRed) solid;
+    padding: 1rem;
+    border-radius: 1rem;
+    max-width: 80vw;
+    left: 50%;
+    width: 400%;
+    transform: translateX(-50%);
+    text-align: center;
 }
 
 .newGameButton {
@@ -340,6 +370,16 @@ body {
     .eventContainer {
         left: 45%;
         transform: translateY(-60%) scaleX(-1) scale(0.8);
+    }
+}
+
+@media (max-height: 567px) {
+    .keyboard {
+        margin: 1rem 0 0 0;
+    }
+
+    .endGame h1 {
+        margin: 10vh 0 0 0;
     }
 }
 
