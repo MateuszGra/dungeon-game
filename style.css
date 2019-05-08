@@ -154,7 +154,8 @@ body {
 
 .shopButton,
 .newGameButton,
-.continue {
+.continue,
+.keyboardButton {
     color: white;
     background: var(--colorRed);
     font-family: 'VT323', monospace;
@@ -165,7 +166,8 @@ body {
 
 .shopButton:active,
 .newGameButton:active,
-.continue:active {
+.continue:active,
+.keyboardButton:active {
     box-shadow: 0rem 0.2rem #dcdcdc;
     transform: translateY(0.4rem);
 }
@@ -209,14 +211,22 @@ body {
     border-radius: 1rem;
     padding: 1rem;
     min-height: 5rem;
+    min-width: 10rem;
 }
 
-.keyboardImg {
-    width: 8rem;
+.keyboardButton {
+    border-radius: 1rem;
+    padding: 0.5rem;
+    min-height: 5rem;
+    min-width: 11.6rem;
+}
+
+.continue,
+.keyboardButton {
+    margin: 2rem 0 0 0;
 }
 
 .keyboard {
-    margin: 3rem 0 0 0;
     position: relative;
     cursor: pointer;
 }
@@ -232,17 +242,14 @@ body {
     border-radius: 1rem;
     max-width: 80vw;
     left: 50%;
-    width: 400%;
+    top: 120%;
+    width: 250%;
     transform: translateX(-50%);
     text-align: center;
 }
 
 .newGameButton {
     margin: 4rem 0 0 0;
-}
-
-.continue {
-    margin: 2rem 0 0 0;
 }
 
 .endGame h1 {
@@ -385,10 +392,6 @@ body {
 }
 
 @media (max-height: 567px) {
-    .keyboard {
-        margin: 1rem 0 0 0;
-    }
-
     .endGame h1 {
         margin: 10vh 0 0 0;
     }
