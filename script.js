@@ -674,18 +674,18 @@
     document.addEventListener("keyup", event => {
         if (endGame.classList[1] == 'none') {
             if (shop.classList[1] == 'none') {
-                if (event.code == 'Enter' || event.code == 'Space') {
+                if (event.keyCode == 32 || event.keyCode == 13) {
                     eventClick();
                 }
             }
 
             for (let i = 0; i < flaskHtml.length; i++) {
-                if (event.code == 'Digit' + (1 + i)) {
+                if (event.keyCode == 49 + i) {
                     flaskClick(i);
                 }
             }
 
-            if (event.code == 'Escape') {
+            if (event.keyCode == 27) {
                 shop.classList.toggle('none');
                 whatInShop();
             }
