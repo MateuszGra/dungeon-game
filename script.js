@@ -333,7 +333,7 @@
         }
     }
 
-    event = () => {
+    createNewEvent = () => {
         let heroPower;
 
         if (hero.level < 4) {
@@ -421,7 +421,7 @@
 
         createFlask();
         createDangeon();
-        event();
+        createNewEvent();
         gold.textContent = hero.gold;
         levelHtml.textContent = hero.level;
         hpHtml.textContent = hero.HP + '/' + hero.maxHP;
@@ -531,7 +531,7 @@
 
         if (eventLot <= 1) {
             createDangeon();
-            event();
+            createNewEvent();
         }
 
         if (eventHP == 0 && eventLot > 1) {
@@ -541,7 +541,7 @@
 
             levelUp();
             createDangeon();
-            event();
+            createNewEvent();
         }
 
         liveLevel();
@@ -674,17 +674,18 @@
     document.addEventListener("keyup", event => {
         if (endGame.classList[1] == 'none') {
             if (shop.classList[1] == 'none') {
+                //Space and Enter
                 if (event.keyCode == 32 || event.keyCode == 13) {
                     eventClick();
                 }
             }
-
+            //1-5
             for (let i = 0; i < flaskHtml.length; i++) {
                 if (event.keyCode == 49 + i) {
                     flaskClick(i);
                 }
             }
-
+            //Escape
             if (event.keyCode == 27) {
                 shop.classList.toggle('none');
                 whatInShop();
@@ -699,7 +700,7 @@
         keyboardMenu.classList.toggle('none');
     });
 
-    event();
+    createNewEvent();
     createDangeon();
     liveLevel();
 })();
