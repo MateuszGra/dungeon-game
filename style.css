@@ -158,8 +158,7 @@ body {
     color: white;
     background: var(--colorRed);
     font-family: 'VT323', monospace;
-    border: none;
-    box-shadow: 0 0.4rem lightgrey;
+    box-shadow: 0 0.5rem #888888;
     outline: none;
     cursor: pointer;
 }
@@ -167,18 +166,29 @@ body {
 .shopButton:active,
 .newGameButton:active,
 .continue:active {
-    box-shadow: 0rem 0.2rem dimgray;
-    transform: translateY(0.2rem);
+    box-shadow: 0rem 0.2rem #dcdcdc;
+    transform: translateY(0.4rem);
+}
+
+.shopButton:active {
+    border-right: 0.3rem #dcdcdc solid;
+    border-bottom: 0.3rem #dcdcdc solid;
+    border-left: 0.3rem #888888 solid;
+    border-top: 0.3rem #888888 solid;
 }
 
 .shopButton {
     font-size: 3rem;
-    width: 90%;
+    width: 80%;
     height: 4.5rem;
     border-radius: 1rem;
     margin: 5rem 0 0 0;
     text-align: center;
     line-height: 4.5rem;
+    border-top: 0.3rem #dcdcdc solid;
+    border-left: 0.3rem #dcdcdc solid;
+    border-right: 0.3rem #888888 solid;
+    border-bottom: 0.3rem #888888 solid;
 }
 
 .endGame {
@@ -198,6 +208,7 @@ body {
     font-size: 3rem;
     border-radius: 1rem;
     padding: 1rem;
+    min-height: 5rem;
 }
 
 .keyboardImg {
