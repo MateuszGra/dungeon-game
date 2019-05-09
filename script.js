@@ -659,12 +659,15 @@
     });
 
     buyFlask = () => {
-        if (hero.gold >= 10 && flaskHtml[0].classList[1] != 'full' || hero.gold >= 10 && flaskHtml[1].classList[1] != 'full' || hero.gold >= 10 && flaskHtml[2].classList[1] != 'full' || hero.gold >= 10 && flaskHtml[3].classList[1] != 'full' || hero.gold >= 10 && flaskHtml[4].classList[1] != 'full') {
-            hero.gold -= 10;
-            hero.flasks = 1;
-            createFlask();
-            gold.textContent = hero.gold;
-            save();
+        for (let i = 0; i < flaskHtml.length; i++) {
+            if (hero.gold >= 10 && flaskHtml[i].classList[0] != 'full') {
+                hero.gold -= 10;
+                hero.flasks = 1;
+                createFlask();
+                gold.textContent = hero.gold;
+                save();
+                break
+            }
         }
     }
 
