@@ -1,6 +1,8 @@
 * {
     margin: 0;
     padding: 0;
+    outline: none;
+    user-select: none;
 }
 
 :root {
@@ -25,7 +27,6 @@ body {
     justify-content: center;
     flex-direction: row;
     min-height: 100vh;
-    user-select: none;
 }
 
 .gamarea {
@@ -160,7 +161,6 @@ body {
     background: var(--colorRed);
     font-family: 'VT323', monospace;
     box-shadow: 0 0.5rem #888888;
-    outline: none;
     cursor: pointer;
 }
 

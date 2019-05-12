@@ -501,69 +501,71 @@
 
     //click on monster (damage, moob life bar lenght...)
     eventClick = () => {
-        if (eventLot > 1) {
-            let damageMoob = lottery(moobs[eventLot].minDamage, moobs[eventLot].maxDamage);
-            hero.HP = hero.HP - damageMoob;
-            let damageHero = lottery(weapons[hero.weapon].minDamage, weapons[hero.weapon].maxDamage) + lottery(1, 6) + hero.level;
-            eventHP = eventHP - damageHero;
-            if (eventHP < 0) {
-                eventHP = 0;
+        if (hero.HP > 0) {
+            if (eventLot > 1) {
+                let damageMoob = lottery(moobs[eventLot].minDamage, moobs[eventLot].maxDamage);
+                hero.HP = hero.HP - damageMoob;
+                let damageHero = lottery(weapons[hero.weapon].minDamage, weapons[hero.weapon].maxDamage) + lottery(1, 6) + hero.level;
+                eventHP = eventHP - damageHero;
+                if (eventHP < 0) {
+                    eventHP = 0;
+                }
+                eventHpHtml.style.width = (eventHP / eventFullHp * 100) + '%';
+
+                if ((eventHP / eventFullHp * 100) >= 90) {
+                    eventHpHtml.style.backgroundColor = "var(--fullHp)";
+                } else if ((eventHP / eventFullHp * 100) >= 60) {
+                    eventHpHtml.style.backgroundColor = "var(--lessHp)";
+                } else if ((eventHP / eventFullHp * 100) >= 30) {
+                    eventHpHtml.style.backgroundColor = "var(--mediumHp)";
+                } else if ((eventHP / eventFullHp * 100) > 7) {
+                    eventHpHtml.style.backgroundColor = "var(--colorFlask)";
+                } else if ((eventHP / eventFullHp * 100) <= 7) {
+                    eventHpHtml.style.backgroundColor = "var(--colorRed)";
+                }
+
+                CrateInscription(heroContainer, damageMoob, 'damage');
+                CrateInscription(eventContainer, damageHero, 'damageMoob');
+
+            } else if (eventLot == 1) {
+                hero.flasks = lottery(0, 4);
+                if (hero.flasks > 0) {
+                    CrateInscription(eventContainer, hero.flasks, 'flasksAdd');
+                    createFlask();
+                }
+                let goldAdd = lottery(1, 18) + lottery(0, hero.level);
+                hero.gold = hero.gold + goldAdd;
+                if (hero.gold > 99999) {
+                    hero.gold = 99999;
+                }
+
+                gold.textContent = hero.gold;
+                CrateInscription(eventContainer, goldAdd, 'items');
             }
-            eventHpHtml.style.width = (eventHP / eventFullHp * 100) + '%';
 
-            if ((eventHP / eventFullHp * 100) >= 90) {
-                eventHpHtml.style.backgroundColor = "var(--fullHp)";
-            } else if ((eventHP / eventFullHp * 100) >= 60) {
-                eventHpHtml.style.backgroundColor = "var(--lessHp)";
-            } else if ((eventHP / eventFullHp * 100) >= 30) {
-                eventHpHtml.style.backgroundColor = "var(--mediumHp)";
-            } else if ((eventHP / eventFullHp * 100) > 7) {
-                eventHpHtml.style.backgroundColor = "var(--colorFlask)";
-            } else if ((eventHP / eventFullHp * 100) <= 7) {
-                eventHpHtml.style.backgroundColor = "var(--colorRed)";
+            if (eventLot <= 1) {
+                createDangeon();
+                createNewEvent();
             }
 
-            CrateInscription(heroContainer, damageMoob, 'damage');
-            CrateInscription(eventContainer, damageHero, 'damageMoob');
+            if (eventHP == 0 && eventLot > 1) {
+                CrateInscription(eventContainer, moobs[eventLot].experience + 'exp', 'exp');
+                hero.experience = hero.experience + moobs[eventLot].experience;
+                expLine.style.width = ((hero.experience - levelBefore) / (135 * hero.level)) * 100 + '%';
 
-        } else if (eventLot == 1) {
-            hero.flasks = lottery(0, 4);
-            if (hero.flasks > 0) {
-                CrateInscription(eventContainer, hero.flasks, 'flasksAdd');
-                createFlask();
-            }
-            let goldAdd = lottery(1, 18) + lottery(0, hero.level);
-            hero.gold = hero.gold + goldAdd;
-            if (hero.gold > 99999) {
-                hero.gold = 99999;
+                levelUp();
+                createDangeon();
+                createNewEvent();
             }
 
-            gold.textContent = hero.gold;
-            CrateInscription(eventContainer, goldAdd, 'items');
-        }
-
-        if (eventLot <= 1) {
-            createDangeon();
-            createNewEvent();
-        }
-
-        if (eventHP == 0 && eventLot > 1) {
-            CrateInscription(eventContainer, moobs[eventLot].experience + 'exp', 'exp');
-            hero.experience = hero.experience + moobs[eventLot].experience;
-            expLine.style.width = ((hero.experience - levelBefore) / (135 * hero.level)) * 100 + '%';
-
-            levelUp();
-            createDangeon();
-            createNewEvent();
-        }
-
-        liveLevel();
-        hpHtml.textContent = hero.HP + '/' + hero.maxHP;
-        save();
-        if (parseInt(localStorage.getItem('HP')) != 0 && localStorage.getItem('HP') != null) {
-            continueHtml.classList.remove('none');
-        } else {
-            continueHtml.classList.add('none');
+            liveLevel();
+            hpHtml.textContent = hero.HP + '/' + hero.maxHP;
+            save();
+            if (parseInt(localStorage.getItem('HP')) != 0 && localStorage.getItem('HP') != null) {
+                continueHtml.classList.remove('none');
+            } else {
+                continueHtml.classList.add('none');
+            }
         }
     }
 
@@ -572,18 +574,20 @@
 
     //bottom panel - clicking on a potions
     flaskClick = n => {
-        if (flaskHtml[n].classList[1] == 'full' && hero.HP < hero.maxHP) {
-            flaskHtml[n].classList.remove('full');
-            let addHp = Math.round((hero.maxHP / 4) + lottery(0, (hero.maxHP / 3)))
-            hero.HP += addHp;
-            CrateInscription(heroContainer, '+' + addHp, 'damage');
-            if (hero.HP > hero.maxHP) {
-                hero.HP = hero.maxHP;
+        if (hero.HP > 0) {
+            if (flaskHtml[n].classList[1] == 'full' && hero.HP < hero.maxHP) {
+                flaskHtml[n].classList.remove('full');
+                let addHp = Math.round((hero.maxHP / 4) + lottery(0, (hero.maxHP / 3)))
+                hero.HP += addHp;
+                CrateInscription(heroContainer, '+' + addHp, 'damage');
+                if (hero.HP > hero.maxHP) {
+                    hero.HP = hero.maxHP;
+                }
             }
+            hpHtml.textContent = hero.HP + '/' + hero.maxHP;
+            liveLevel();
+            save();
         }
-        hpHtml.textContent = hero.HP + '/' + hero.maxHP;
-        liveLevel();
-        save();
     }
 
     for (let i = 0; i < flaskHtml.length; i++) {
@@ -665,7 +669,7 @@
     //buy new weapon
     for (let i = 0; i < weaponShop.length; i++) {
         weaponShop[i].addEventListener('click', (e) => {
-            if (hero.gold >= weapons[weaponToBuy[i]].price && hero.weapon != weaponToBuy[i]) {
+            if (hero.gold >= weapons[weaponToBuy[i]].price && hero.weapon != weaponToBuy[i] && hero.HP > 0) {
                 hero.gold -= weapons[weaponToBuy[i]].price;
                 hero.weapon = weaponToBuy[i];
                 weaponUse.src = weapons[weaponToBuy[i]].src;
@@ -688,7 +692,7 @@
     //clicking on flask in shop
     buyFlask = () => {
         for (let i = 0; i < flaskHtml.length; i++) {
-            if (hero.gold >= 10 && flaskHtml[i].classList[0] != 'full') {
+            if (hero.gold >= 10 && flaskHtml[i].classList[0] != 'full' && hero.HP > 0) {
                 hero.gold -= 10;
                 hero.flasks = 1;
                 createFlask();
