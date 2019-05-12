@@ -409,6 +409,10 @@
 
     //reset statistics (when hero die)
     reset = () => {
+        for (let i = 0; i < flaskHtml.length; i++) {
+            flaskHtml[i].classList.remove('full');
+        }
+
         hero.experience = 0;
         hero.level = 1;
         expLine.style.width = ((hero.experience - levelBefore) / (135 * hero.level)) * 100 + '%';
@@ -422,11 +426,6 @@
         levelBefore = hero.experience;
 
         liveLevel();
-
-        for (let i = 0; i < flaskHtml.length; i++) {
-            flaskHtml[i].classList.remove('full');
-        }
-
         createFlask();
         createDangeon();
         createNewEvent();
@@ -611,6 +610,10 @@
 
     //clicking on CONTINUE button in main menu
     load = () => {
+        for (let i = 0; i < flaskHtml.length; i++) {
+            flaskHtml[i].classList.remove('full');
+        }
+
         endGame.classList.add('none');
 
         hero.experience = parseInt(localStorage.getItem('experience'));
