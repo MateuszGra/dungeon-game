@@ -275,7 +275,7 @@ body {
     position: absolute;
     top: 0;
     width: 100%;
-    text-shadow: 0rem 0rem 0.2rem black;
+    text-shadow: 0rem 0rem 0.5rem black;
     animation: fly 1s;
 }
 
@@ -346,6 +346,64 @@ body {
     background: var(--colorGold);
     margin: 3.2rem 0 0 0;
     transition: 0.4s;
+}
+
+.interlude {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: flyFromLeft 2s linear;
+}
+
+.firstSword {
+    animation: firstSwordAnimate 0.5s linear infinite;
+}
+
+.secendSword {
+    animation: secendSwordAnimate 0.5s linear infinite;
+}
+
+@keyframes flyFromLeft {
+    0% {
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes secendSwordAnimate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(-45deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes firstSwordAnimate {
+    0% {
+        transform: rotate(0deg)
+    }
+
+    50% {
+        transform: rotate(45deg)
+    }
+
+    100% {
+        transform: rotate(0deg)
+    }
 }
 
 @keyframes fly {

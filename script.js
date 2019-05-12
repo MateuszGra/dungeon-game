@@ -1,4 +1,5 @@
 (() => {
+    //hero statistics and img img.src
     const hero = {
         name: 'name',
         level: 1,
@@ -11,6 +12,7 @@
         html: document.querySelector('.hero'),
         img: 'img/heores/knight_',
     }
+    // all moob list with statistics and img.src
     const moobs = [{
         name: 'chest empty',
         img: 'img/chest/chest_',
@@ -231,43 +233,43 @@
         src: 'img/weapons/two_handed_golden_sword.png',
     }, ];
 
-    const hpHtml = document.querySelector('.hp');
-    hpHtml.textContent = hero.HP + '/' + hero.maxHP;
+    const hpHtml = document.querySelector('.hp'); //panel top - number - hero health
+    const gold = document.querySelector('.gold'); //panel top - number - amount of gold in HTML
+    const levelHtml = document.querySelector('.level'); //panel top number - amount of life
+    const liveHtml = document.querySelector('.live'); //panel top - icon - amount of life
+    const expLine = document.querySelector('.experience'); // panel top - bar - experience bar
 
-    const gold = document.querySelector('.gold');
-    gold.textContent = hero.gold;
+    const eventContainer = document.querySelector('.eventContainer'); //gamearea -  moob or chest container
+    const eventHtml = document.querySelector('.event'); //gamearea - moob or chest IMG
+    const eventHpHtml = document.querySelector('.eventHp'); //gamarea - moob -life bar
+    const eventFullHpHtml = document.querySelector('.eventFullHp'); //gamarea - moob -full life bar (black background)
+    const interlude = document.querySelector('.interlude'); // gamearea - sword animation game begins
 
-    const levelHtml = document.querySelector('.level');
-    levelHtml.textContent = hero.level;
+    const heroContainer = document.querySelector('.heroContainer'); //gamearea-  hero container
+    const heroHpHtml = document.querySelector('.heroHp'); //gamrea - hero - life bar
 
-    const eventHtml = document.querySelector('.event');
-    const liveHtml = document.querySelector('.live');
-    const eventHpHtml = document.querySelector('.eventHp');
-    const heroHpHtml = document.querySelector('.heroHp');
-    const eventFullHpHtml = document.querySelector('.eventFullHp');
-    const flaskHtml = document.querySelectorAll('.flask');
-    const endGame = document.querySelector('.endGame');
-    const endGameButton = document.querySelector('.newGameButton');
-    const heroContainer = document.querySelector('.heroContainer');
-    const eventContainer = document.querySelector('.eventContainer');
-    const shop = document.querySelector('.shop');
-    const shopButton = document.querySelector('.shopButton');
-    const weaponShop = document.querySelectorAll('.weaponShop');
-    const flaskShop = document.querySelector('.flaskShop');
-    const weaponUse = document.querySelector('.weaponUse');
-    const continueHtml = document.querySelector('.continue');
-    const expLine = document.querySelector('.experience');
-    const weaponDamage = document.querySelector('.weaponDamage')
-    const keyboard = document.querySelector('.keyboard');
-    const keyboardMenu = document.querySelector('.keyboardMenu');
+    const flaskHtml = document.querySelectorAll('.flask'); //bottom bar - all flasks
 
-    let eventLot;
-    let eventHP;
-    let eventFullHp;
+    const endGame = document.querySelector('.endGame'); //main menu - wrapper
+    const endGameButton = document.querySelector('.newGameButton'); //main menu - button- start new game
+    const continueHtml = document.querySelector('.continue'); // main menu- button - continue
+    const keyboard = document.querySelector('.keyboard'); //main menu- button - keyboard
+    const keyboardMenu = document.querySelector('.keyboardMenu'); //main menu- wrapper - keyboard info
 
-    //animations
+    const shop = document.querySelector('.shop'); //shop - wrapper
+    const shopButton = document.querySelector('.shopButton'); //shop - button
+    const weaponShop = document.querySelectorAll('.weaponShop'); //shop - all weapons
+    const flaskShop = document.querySelector('.flaskShop'); //shop - flask
+
+    const weaponUse = document.querySelector('.weaponUse'); //left panel - hero current weapon
+    const weaponDamage = document.querySelector('.weaponDamage') //left panel - hero current weapon damage
+
+    let eventLot; //drawn moob from function: createNewEvent
+    let eventHP; //current mob hp
+    let eventFullHp; //current mob full hp
+
+    //animations (sprints: money, hero and moobas)
     let number = -1;
-
     setInterval(() => {
         number++;
 
@@ -283,14 +285,15 @@
             money[i].src = 'img/icons/coin_' + number + '.png';
         }
     }, 150);
-    ///////////
 
+    //draws: chest contents, moobs, damage...
     lottery = (min, max) => {
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min)) + min;
     }
 
+    //creates a different dangeon each time
     createDangeon = () => {
         const floors = document.querySelectorAll('.floor');
         const floorTop = document.querySelectorAll('.floorTop');
@@ -311,7 +314,7 @@
                 walls[i].src = 'img/wall/wall_0.png';
             }
         }
-
+        //special like a fountains
         for (let i = 0; i < wallBottom.length; i++) {
             if (lottery(0, 9) > 7) {
                 let lot = lottery(0, 7);
@@ -333,23 +336,24 @@
         }
     }
 
+    //draws a new monster or chest
     createNewEvent = () => {
-        let heroPower;
+        let moobsLenght;
 
         if (hero.level < 4) {
-            heroPower = 5;
+            moobsLenght = 5;
         } else if (hero.level < 6) {
-            heroPower = 7;
+            moobsLenght = 7;
         } else if (hero.level < 10) {
-            heroPower = 10;
+            moobsLenght = 10;
         } else if (hero.level < 15) {
-            heroPower = 15;
+            moobsLenght = 15;
         } else {
-            heroPower = moobs.length;
+            moobsLenght = moobs.length;
         }
 
         if (lottery(0, 10) > 2) {
-            eventLot = lottery(2, heroPower);
+            eventLot = lottery(2, moobsLenght);
             eventHP = moobs[eventLot].HP;
             eventFullHp = eventHP;
             eventHpHtml.style.width = (eventHP / eventFullHp * 100) + '%';
@@ -362,6 +366,7 @@
         }
     }
 
+    //create subtitles over characters
     CrateInscription = (where, text, style) => {
         let log = document.createElement('div');
         where.appendChild(log);
@@ -387,6 +392,7 @@
         });
     }
 
+    //add potions to the bottom panel
     createFlask = () => {
         while (hero.flasks > 0) {
             for (let i = 0; i < flaskHtml.length; i++) {
@@ -401,6 +407,7 @@
         }
     }
 
+    //reset statistics (when hero die)
     reset = () => {
         hero.experience = 0;
         hero.level = 1;
@@ -427,6 +434,7 @@
         hpHtml.textContent = hero.HP + '/' + hero.maxHP;
     }
 
+    //change colors and length of the life bar, icons...
     liveLevel = () => {
         if (hero.HP >= 0.5 * hero.maxHP) {
             liveHtml.src = 'img/icons/heart_0.png';
@@ -453,6 +461,8 @@
             heroHpHtml.style.backgroundColor = "var(--colorRed)";
         }
     }
+
+    //show new level, changes statistics
     let levelBefore = hero.experience;
     levelUp = () => {
         if (hero.experience > levelBefore + 135 * hero.level && hero.level < 1000) {
@@ -467,6 +477,7 @@
         }
     }
 
+    //store statistics for local storage
     save = () => {
         localStorage.setItem('experience', hero.experience);
         localStorage.setItem('level', hero.level);
@@ -486,7 +497,9 @@
         localStorage.setItem('flasks', flaskLoop);
     }
 
-    //events
+    //////////////////////////////////////// event listeners ////////////////////////////////////////
+
+    //click on monster (damage, moob life bar lenght...)
     eventClick = () => {
         if (eventLot > 1) {
             let damageMoob = lottery(moobs[eventLot].minDamage, moobs[eventLot].maxDamage);
@@ -556,6 +569,8 @@
 
     eventHtml.addEventListener('click', eventClick);
     eventHtml.addEventListener('touch', eventClick);
+
+    //bottom panel - clicking on a potions
     flaskClick = n => {
         if (flaskHtml[n].classList[1] == 'full' && hero.HP < hero.maxHP) {
             flaskHtml[n].classList.remove('full');
@@ -580,15 +595,22 @@
         });
     }
 
+    //clicking on NEW GAME button in main menu
     endGameButtonClick = () => {
         endGame.classList.add('none');
         reset();
         expLine.style.width = ((hero.experience - levelBefore) / (135 * hero.level)) * 100 + '%';
+
+        interlude.classList.remove('none');
+        interlude.addEventListener('animationend', (e) => {
+            interlude.classList.add('none');
+        });
     }
 
     endGameButton.addEventListener('click', endGameButtonClick);
     endGameButton.addEventListener('touch', endGameButtonClick);
 
+    //clicking on CONTINUE button in main menu
     load = () => {
         endGame.classList.add('none');
 
@@ -609,6 +631,11 @@
         gold.textContent = hero.gold;
         levelHtml.textContent = hero.level;
         expLine.style.width = ((hero.experience - levelBefore) / (135 * hero.level)) * 100 + '%';
+
+        interlude.classList.remove('none');
+        interlude.addEventListener('animationend', (e) => {
+            interlude.classList.add('none');
+        });
     }
 
     if (parseInt(localStorage.getItem('HP')) != 0 && localStorage.getItem('HP') != null) {
@@ -618,9 +645,8 @@
     continueHtml.addEventListener('click', load);
     continueHtml.addEventListener('touch', load);
 
-
+    //what weapon is available in the store / clicking at shop buttom
     let weaponToBuy = [];
-
     whatInShop = () => {
         const weaponsImg = document.querySelectorAll('.weaponImg');
         const weaponInfo = document.querySelectorAll('.weaponInfo');
@@ -636,6 +662,7 @@
         }
     }
 
+    //buy new weapon
     for (let i = 0; i < weaponShop.length; i++) {
         weaponShop[i].addEventListener('click', (e) => {
             if (hero.gold >= weapons[weaponToBuy[i]].price && hero.weapon != weaponToBuy[i]) {
@@ -658,6 +685,7 @@
         whatInShop();
     });
 
+    //clicking on flask in shop
     buyFlask = () => {
         for (let i = 0; i < flaskHtml.length; i++) {
             if (hero.gold >= 10 && flaskHtml[i].classList[0] != 'full') {
@@ -674,22 +702,22 @@
     flaskShop.addEventListener('click', buyFlask);
     flaskShop.addEventListener('touch', buyFlask);
 
+    //keybord events
     document.addEventListener("keyup", event => {
         if (endGame.classList[1] == 'none') {
             if (shop.classList[1] == 'none') {
-                //Space and Enter
-                if (event.keyCode == 32 || event.keyCode == 13) {
+                if (event.keyCode == 32 || event.keyCode == 13) { //Space and Enter
                     eventClick();
                 }
             }
-            //1-5
-            for (let i = 0; i < flaskHtml.length; i++) {
+
+            for (let i = 0; i < flaskHtml.length; i++) { //1-5
                 if (event.keyCode == 49 + i) {
                     flaskClick(i);
                 }
             }
-            //Escape
-            if (event.keyCode == 27) {
+
+            if (event.keyCode == 27) { //Escape
                 shop.classList.toggle('none');
                 whatInShop();
             }
