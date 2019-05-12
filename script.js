@@ -561,11 +561,6 @@
 
         liveLevel();
         save();
-        if (parseInt(localStorage.getItem('HP')) != 0 && localStorage.getItem('HP') != null) {
-            continueHtml.classList.remove('none');
-        } else {
-            continueHtml.classList.add('none');
-        }
     }
 
     eventHtml.addEventListener('click', eventClick);
