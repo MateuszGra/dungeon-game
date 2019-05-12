@@ -411,6 +411,7 @@
     reset = () => {
         hero.experience = 0;
         hero.level = 1;
+        expLine.style.width = ((hero.experience - levelBefore) / (135 * hero.level)) * 100 + '%';
         hero.maxHP = 100;
         hero.HP = 100;
         hero.weapon = 0;
@@ -599,9 +600,6 @@
     //clicking on NEW GAME button in main menu
     endGameButtonClick = () => {
         endGame.classList.add('none');
-        reset();
-        expLine.style.width = ((hero.experience - levelBefore) / (135 * hero.level)) * 100 + '%';
-
         interlude.classList.remove('none');
         interlude.addEventListener('animationend', (e) => {
             interlude.classList.add('none');
