@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    outline: none;
 }
 
 :root {
@@ -160,7 +161,6 @@ body {
     background: var(--colorRed);
     font-family: 'VT323', monospace;
     box-shadow: 0 0.5rem #888888;
-    outline: none;
     cursor: pointer;
 }
 
