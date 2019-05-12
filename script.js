@@ -481,22 +481,26 @@
 
     //store statistics for local storage
     save = () => {
-        localStorage.setItem('experience', hero.experience);
-        localStorage.setItem('level', hero.level);
-        localStorage.setItem('maxHP', hero.maxHP);
-        localStorage.setItem('HP', hero.HP);
-        localStorage.setItem('weapon', hero.weapon);
-        localStorage.setItem('gold', hero.gold);
-        localStorage.setItem('levelBefore', levelBefore);
-
-        let flaskLoop = 0;
+        let flaskLoop = '';
         for (let i = 0; i < flaskHtml.length; i++) {
             if (flaskHtml[i].classList[1] == 'full') {
-                flaskLoop++;
+                flaskLoop += '1';
+            } else {
+                flaskLoop += '0'
             }
         }
 
-        localStorage.setItem('flasks', flaskLoop);
+        const statsSave = {
+            'experience': hero.experience,
+            'level': hero.level,
+            'maxHP': hero.maxHP,
+            'HP': hero.HP,
+            'weapon': hero.weapon,
+            'gold': hero.gold,
+            'levelBefore': levelBefore,
+            'flasks': flaskLoop
+        };
+        localStorage.setItem('stats', JSON.stringify(statsSave));
     }
 
     //////////////////////////////////////// event listeners ////////////////////////////////////////
@@ -610,18 +614,23 @@
         }
 
         endGame.classList.add('none');
+        const statLoad = JSON.parse(localStorage.getItem('stats'));
 
-        hero.experience = parseInt(localStorage.getItem('experience'));
-        hero.level = parseInt(localStorage.getItem('level'));
-        hero.maxHP = parseInt(localStorage.getItem('maxHP'));
-        hero.HP = parseInt(localStorage.getItem('HP'));
-        hero.weapon = parseInt(localStorage.getItem('weapon'));
-        hero.gold = parseInt(localStorage.getItem('gold'));
-        hero.flasks = parseInt(localStorage.getItem('flasks'));
-        levelBefore = parseInt(localStorage.getItem('levelBefore'))
-        createFlask();
+        hero.experience = statLoad.experience;
+        hero.level = statLoad.level;
+        hero.maxHP = statLoad.maxHP;
+        hero.HP = statLoad.HP;
+        hero.weapon = statLoad.weapon;
+        hero.gold = statLoad.gold;
+        levelBefore = statLoad.levelBefore;
+
+        for (let i = 0; i < flaskHtml.length; i++) {
+            if (parseInt(statLoad.flasks[i]) == 1) {
+                flaskHtml[i].classList.add('full');
+            }
+        }
+
         liveLevel();
-
         weaponUse.src = weapons[hero.weapon].src;
         weaponDamage.textContent = weapons[hero.weapon].minDamage + '-' + weapons[hero.weapon].maxDamage + 'dmg';
         hpHtml.textContent = hero.HP + '/' + hero.maxHP;
@@ -635,7 +644,7 @@
         });
     }
 
-    if (parseInt(localStorage.getItem('HP')) != 0 && localStorage.getItem('HP') != null) {
+    if (localStorage.getItem('stats') != null) {
         continueHtml.classList.remove('none');
     }
 
@@ -731,5 +740,4 @@
     reset();
     createNewEvent();
     createDangeon();
-    liveLevel();
 })();
