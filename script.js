@@ -235,7 +235,6 @@
 
     const hpHtml = document.querySelector('.hp'); //panel top - number - hero health
     const gold = document.querySelector('.gold'); //panel top - number - amount of gold in HTML
-    const levelHtml = document.querySelector('.level'); //panel top number - amount of life
     const liveHtml = document.querySelector('.live'); //panel top - icon - amount of life
     const expLine = document.querySelector('.experience'); // panel top - bar - experience bar
 
@@ -263,6 +262,7 @@
 
     const weaponUse = document.querySelector('.weaponUse'); //left panel - hero current weapon
     const weaponDamage = document.querySelector('.weaponDamage') //left panel - hero current weapon damage
+    const levelHtml = document.querySelector('.level'); //panel left - level
 
     let eventLot; //drawn moob from function: createNewEvent
     let eventHP; //current mob hp
